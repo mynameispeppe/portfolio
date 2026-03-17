@@ -58,7 +58,7 @@ export function Contacts() {
               Start a conversation
             </a>
             <a
-              href="www.linkedin.com/in/giuseppe-milazzo-b70236153"
+              href="https://www.linkedin.com/in/giuseppe-milazzo-b70236153/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary"
