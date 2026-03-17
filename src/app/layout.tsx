@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   keywords: ["Angular", "Frontend Developer", "Web Developer", "Portfolio", "Giuseppe Milazzo", "Pescara"],
   authors: [{ name: "Giuseppe Milazzo" }],
   openGraph: {
-    title: "Giuseppe Milazzo — Angular Developer",
+    title: "Giuseppe Milazzo — Frontend Developer",
     description: "I build scalable and maintainable Angular applications. Based in Pescara, Italy.",
     url: "https://giuseppemilazzo.dev",
     siteName: "Giuseppe Milazzo",

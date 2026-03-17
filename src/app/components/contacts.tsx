@@ -63,7 +63,7 @@ export function Contacts() {
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              Join me on Linkedin
+              Join me on LinkedIn
             </a>
           </motion.div>
         </motion.div>

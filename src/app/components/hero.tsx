@@ -54,7 +54,7 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="mt-2 text-3xl sm:text-4xl md:text-5xl font-title text-text-primary"
             >
-              I&apos;m <span className="text-accent">Angular</span> web developer
+              I&apos;m a <span className="text-accent">Frontend</span> developer
             </motion.h1>
 
             <motion.p
@@ -62,7 +62,7 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="mt-4 sm:mt-6 max-w-xl text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed font-body"
             >
-              I build scalable and maintainable Angular applications, collaborating with product and engineering teams to deliver reliable digital solutions.
+              Specialized in Angular and TypeScript, focused on accessible and enjoyable interfaces.
             </motion.p>
 
             <motion.div

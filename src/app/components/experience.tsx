@@ -25,7 +25,7 @@ const experiences: Experience[] = [
         role: 'Angular Consultant',
         company: 'HERZUM SOFTWARE',
         about:
-          'Led the complete UX/UI redesign of a back-office system for Enel S.p.A., modernizing the interface and restructuring the frontend architecture.\n\nRefactored core modules to improve maintainability, scalability and overall code quality within an Agile Scrum environment.',
+          'Led the complete UX/UI redesign of of an enterprise management platform, modernizing the interface and restructuring the frontend architecture.\n\nRefactored core modules to improve maintainability, scalability and overall code quality within an Agile Scrum environment.',
         stack: 'Angular · TypeScript · NgRx · RxJS · Angular Material · Figma · Scrum',
     },
     {
