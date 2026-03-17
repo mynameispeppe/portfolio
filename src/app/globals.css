@@ -14,18 +14,9 @@ body {
   height: auto;
 }
 
-html.lenis {
-  height: auto;
+html {
+  scroll-behavior: smooth;
 }
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
-}
-
-.lenis.lenis-smooth body {
-  overflow: hidden;
-}
-
 
 @layer utilities {
   .font-title {

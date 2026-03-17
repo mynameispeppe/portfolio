@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Trirong, Dosis } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/app/components/smoothScroll";
 
 export const metadata: Metadata = {
   title: "Giuseppe Milazzo",
@@ -43,9 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className={`${trirong.variable} ${dosis.variable}`}>
-    <SmoothScroll>
       {children}
-    </SmoothScroll>
     </body>
     </html>
   );

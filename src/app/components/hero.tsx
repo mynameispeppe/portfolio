@@ -74,7 +74,7 @@ export function Hero() {
                 View Projects
               </Link>
 
-              <Link href="/cv.pdf" className="btn-secondary font-body">
+              <Link href="/cv.pdf" target='_blank' className="btn-secondary font-body">
                 Download CV
               </Link>
             </motion.div>
