@@ -34,7 +34,7 @@ export default function MobileNav() {
 
   return (
     <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden">
-      <div className="bg-card/20 rounded-[30px] squircle px-2 py-2 flex items-center gap-1 shadow-md backdrop-blur-md">
+      <div className="bg-card/20 rounded-[30px] squircle px-2 py-2 flex items-center gap-1 shadow-md">
         {navLinks.map((link) => {
           const isActive = activeId === link.id
           return (
