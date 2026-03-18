@@ -47,7 +47,7 @@ export default function MobileNav() {
 
   return (
     <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden">
-      <div className="bg-text-primary rounded-2xl squircle px-2 py-2 flex items-center gap-1 shadow-md">
+      <div className="rounded-2xl squircle px-2 py-2 flex items-center gap-1 shadow-sm glass">
         {navLinks.map((link) => {
           const isActive = activeId === link.id
           return (
@@ -57,8 +57,8 @@ export default function MobileNav() {
               onClick={(e) => handleTap(e, link.id)}
               className={`px-4 py-2 text-sm font-medium font-body transition-all duration-300 whitespace-nowrap ${
                 isActive
-                  ? 'bg-background text-text-primary rounded-xl squircle'
-                  : 'text-background/70'
+                  ? 'bg-accent text-background rounded-xl squircle'
+                  : 'text-text-primary/70'
               }`}
             >
               {link.label}

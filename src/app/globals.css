@@ -66,19 +66,13 @@ html {
 }
 
 .btn-secondary {
-  @apply text-center rounded-xl bg-text-primary text-background font-medium text-lg w-56 py-2 px-4 shadow-md cursor-pointer ;
+  @apply text-center rounded-xl bg-text-primary text-background font-medium text-lg w-56 py-2 px-4 shadow-md cursor-pointer;
   corner-shape: squircle;
-  box-shadow: inset 0 -3px 3px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 -3px 3px 0 rgba(0, 0, 0, 0.25);
 }
 
-.btn-rounded-primary {
-  @apply flex items-center justify-center gap-2 rounded-full bg-accent font-light text-lg py-2 px-8 text-background shadow-md  w-32;
-  corner-shape: squircle;
-  box-shadow: inset 0 -3px 3px 0 rgba(13, 59, 55, 0.25);
-}
-
-.btn-rounded-secondary {
-  @apply flex items-center justify-center gap-2 rounded-full bg-text-primary font-light text-lg py-2 px-8 text-background shadow-md cursor-pointer w-32;
-  corner-shape: squircle;
-  box-shadow: inset 0 -3px 3px 0 rgba(13, 59, 55, 0.25);
+.glass {
+  background: rgba(244, 247, 249, 0.92);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
 }
