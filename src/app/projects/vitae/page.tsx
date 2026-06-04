@@ -72,32 +72,32 @@ function ScreenshotBlock({ feat }: { feat: Feature }) {
   const isLeft = feat.side === 'left'
 
   return (
-    <div className={`relative ${hasSecondary ? 'pb-20 sm:pb-24' : ''} ${isLeft ? 'lg:order-1' : ''}`}>
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[22px] overflow-hidden border border-gray-200"
-      >
-        <div className="relative w-full aspect-16/11 bg-card">
-          <Image src={feat.primaryImage} alt={feat.primaryAlt}
-                 fill
-                 sizes="(max-width: 1024px) 100vw, 60vw"
-                 className="object-cover object-top"
-          />
-        </div>
-      </motion.div>
-
-      {hasSecondary && feat.secondaryImage && (
+      <div className={`relative ${hasSecondary ? 'pb-20 sm:pb-24' : ''} ${isLeft ? 'lg:order-1' : ''}`}>
         <motion.div
-          variants={fadeUpDelayed}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.55, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className={`
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-[22px] overflow-hidden border border-gray-200"
+        >
+          <div className="relative w-full aspect-16/11 bg-card">
+            <Image src={feat.primaryImage} alt={feat.primaryAlt}
+                   fill
+                   sizes="(max-width: 1024px) 100vw, 60vw"
+                   className="object-cover object-top"
+            />
+          </div>
+        </motion.div>
+
+        {hasSecondary && feat.secondaryImage && (
+            <motion.div
+                variants={fadeUpDelayed}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.55, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className={`
             absolute bottom-0 z-10
             ${feat.secondaryPlacement === 'bottom-left' ? 'left-5 sm:left-8' : 'right-5 sm:right-8'}
             w-[58%] sm:w-[54%]
@@ -107,145 +107,190 @@ function ScreenshotBlock({ feat }: { feat: Feature }) {
             
             ring-1 ring-black/5
           `}
-        >
-          <div className="relative w-full aspect-16/11 bg-card">
-            <Image
-              src={feat.secondaryImage}
-              alt={feat.secondaryAlt ?? ''}
-              fill
-              sizes="36vw"
-              className="object-cover object-top"
-            />
-          </div>
-        </motion.div>
-      )}
-    </div>
+            >
+              <div className="relative w-full aspect-16/11 bg-card">
+                <Image
+                    src={feat.secondaryImage}
+                    alt={feat.secondaryAlt ?? ''}
+                    fill
+                    sizes="36vw"
+                    className="object-cover object-top"
+                />
+              </div>
+            </motion.div>
+        )}
+      </div>
   )
 }
 
-/* ── Page ────────────────────────────────────────────────── */
 export default function VitaePage() {
   return (
-    <div className="min-h-screen bg-background text-text-primary">
-      <Navbar />
+      <div className="min-h-screen bg-background text-text-primary">
+        <Navbar />
 
-      <main className="pt-24 pb-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
-        <div className="flex items-center gap-2 text-md text-text-secondary font-body mb-10">
-          <Link href="/" className="hover:text-text-primary transition flex items-center gap-1">
-            <Image src="/icons/arrow-left-logo.svg" alt="" width={12} height={12} />
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/projects" className="hover:text-text-primary transition">
-            Projects
-          </Link>
-          <span>/</span>
-          <span className="text-accent font-medium">Vitae</span>
-        </div>
+        <main className="pt-24 pb-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+          <div className="flex items-center gap-2 text-md text-text-secondary font-body mb-10">
+            <Link href="/" className="hover:text-text-primary transition flex items-center gap-1">
+              <Image src="/icons/arrow-left-logo.svg" alt="" width={12} height={12} />
+              Home
+            </Link>
+            <span>/</span>
+            <Link href="/projects" className="hover:text-text-primary transition">
+              Projects
+            </Link>
+            <span>/</span>
+            <span className="text-accent font-medium">Vitae</span>
+          </div>
 
-        <section>
-          <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold font-title leading-tight max-w-3xl">
-            Your fitness life,{' '}
-            <span className="text-accent">beautifully tracked</span>
-          </motion.h1>
+          <section>
+            <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
+                       className="text-4xl sm:text-5xl lg:text-6xl font-bold font-title leading-tight max-w-3xl">
+              Your fitness life,{' '}
+              <span className="text-accent">beautifully tracked</span>
+            </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-5 text-lg text-text-secondary font-body max-w-xl leading-relaxed">
-            Vitae is a web app for managing your weekly workout sessions and
-            daily nutrition plan — all in one place.
-          </motion.p>
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.12 }}
+                      className="mt-5 text-lg text-text-secondary font-body max-w-xl leading-relaxed">
+              Vitae is a web app for managing your weekly workout sessions and
+              daily nutrition plan — all in one place.
+            </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }} className="mt-6">
-            <div className="flex  justify-start gap-4">
-              <div className="flex items-center gap-2">
-                <Image
-                    src="/icons/user-circle.svg"
-                    alt="User"
-                    width={16}
-                    height={16}
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                />
-                <span className="font-medium text-text-primary/80">test@vitae.app</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Image
-                    src="/icons/lock-narrow.svg"
-                    alt="Password"
-                    width={16}
-                    height={16}
-                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
-                />
-                <span className="font-medium text-text-primary/80">vitae1234</span>
-              </div>
-            </div>
-            <a href="https://vitae-ochre.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center gap-2 mt-8">
-              Open app
-            </a>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-14 rounded-[22px] overflow-hidden border border-gray-200 squircle">
-            <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-gray-200">
-              <span className="w-3 h-3 rounded-full bg-red-400" />
-              <span className="w-3 h-3 rounded-full bg-yellow-400" />
-              <span className="w-3 h-3 rounded-full bg-green-400" />
-              <div className="ml-3 flex-1 bg-background rounded-md px-3 py-1.5 text-xs text-text-secondary font-body select-none">
-                vitae-ochre.vercel.app/dashboard
-              </div>
-            </div>
-            <div className="relative w-full aspect-16/8 bg-card">
-              <Image src="/vitae/dashboard.png" alt="Vitae dashboard" fill priority sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover object-top"/>
-            </div>
-          </motion.div>
-        </section>
-
-        <section className="mt-28 flex flex-col gap-32 sm:gap-40">
-          {features.map((feat, i) => (
-            <div key={i} className={`grid grid-cols-1 gap-12 lg:gap-16 items-center ${feat.side === 'left' ? 'lg:grid-cols-[3fr_2fr]' : 'lg:grid-cols-[2fr_3fr]'}`}>
-              <motion.div variants={fadeUp} initial="hidden" whileInView="visible"
-                          viewport={{ once: true, amount: 0.2 }}
-                          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                          className={feat.side === 'left' ? 'lg:order-2' : ''}>
-                <p className="text-xs uppercase tracking-[0.18em] font-semibold text-accent font-body mb-4">
-                  {feat.eyebrow}
-                </p>
-                <h2 className="text-3xl lg:text-4xl font-bold font-title text-text-primary leading-snug">
-                  {feat.title}
-                </h2>
-                <p className="mt-5 text-text-secondary font-body leading-relaxed text-sm">
-                  {feat.body}
-                </p>
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {feat.pills.map((pill) => (
-                    <span
-                      key={pill}
-                      className="text-xs px-3.5 py-1.5 rounded-full bg-card border border-gray-200 text-text-secondary font-body"
-                    >
-                      {pill}
-                    </span>
-                  ))}
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }} className="mt-6">
+              <div className="flex  justify-start gap-4">
+                <div className="flex items-center gap-2">
+                  <Image
+                      src="/icons/user-circle.svg"
+                      alt="User"
+                      width={16}
+                      height={16}
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                  />
+                  <span className="font-medium text-text-primary/80">test@vitae.app</span>
                 </div>
-              </motion.div>
-              <ScreenshotBlock feat={feat} />
-            </div>
-          ))}
-        </section>
+                <div className="flex items-center gap-2">
+                  <Image
+                      src="/icons/lock-narrow.svg"
+                      alt="Password"
+                      width={16}
+                      height={16}
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                  />
+                  <span className="font-medium text-text-primary/80">vitae1234</span>
+                </div>
+              </div>
+              <a href="https://vitae-ochre.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center gap-2 mt-8">
+                Open app
+              </a>
+            </motion.div>
 
-        {/* ── STACK BAR ── */}
-        <section className="mt-8 pt-8 border-t border-gray-200 flex flex-wrap items-center gap-2.5">
-          <span className="text-sm text-text-secondary font-body mr-1">Built with</span>
-          {stack.map((tech) => (
-            <span
-              key={tech}
-              className="text-xs px-3 py-1.5 rounded-full bg-card border border-gray-200 text-text-secondary font-body"
-            >
+            <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        className="mt-14 rounded-[22px] overflow-hidden border border-gray-200 squircle">
+              <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-gray-200">
+                <span className="w-3 h-3 rounded-full bg-red-400" />
+                <span className="w-3 h-3 rounded-full bg-yellow-400" />
+                <span className="w-3 h-3 rounded-full bg-green-400" />
+                <div className="ml-3 flex-1 bg-background rounded-md px-3 py-1.5 text-xs text-text-secondary font-body select-none">
+                  vitae-ochre.vercel.app/dashboard
+                </div>
+              </div>
+              <div className="relative w-full aspect-16/8 bg-card">
+                <Image src="/vitae/dashboard.png" alt="Vitae dashboard" fill priority sizes="(max-width: 1280px) 100vw, 1280px" className="object-cover object-top"/>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="mt-28 flex flex-col gap-16 sm:gap-32 lg:gap-40">
+            {features.map((feat, i) => (
+                <div key={i}>
+                  <motion.div
+                      variants={fadeUp}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="lg:hidden rounded-[22px] overflow-hidden border border-gray-200"
+                  >
+                    <div className="relative w-full aspect-4/3 bg-card">
+                      <Image
+                          src={feat.primaryImage}
+                          alt={feat.primaryAlt}
+                          fill
+                          sizes="100vw"
+                          className="object-cover object-top"
+                      />
+                    </div>
+                    <div className="p-5 border-t border-gray-200 bg-card">
+                      <p className="text-xs uppercase tracking-[0.18em] font-semibold text-accent font-body mb-3">
+                        {feat.eyebrow}
+                      </p>
+                      <h2 className="text-2xl font-bold font-title text-text-primary leading-snug">
+                        {feat.title}
+                      </h2>
+                      <p className="mt-3 text-text-secondary font-body leading-relaxed text-sm">
+                        {feat.body}
+                      </p>
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {feat.pills.map((pill) => (
+                            <span
+                                key={pill}
+                                className="text-xs px-3.5 py-1.5 rounded-full bg-background border border-gray-200 text-text-secondary font-body"
+                            >
+                        {pill}
+                      </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Desktop: layout two-column originale */}
+                  <div className={`hidden lg:grid gap-16 items-center ${feat.side === 'left' ? 'lg:grid-cols-[3fr_2fr]' : 'lg:grid-cols-[2fr_3fr]'}`}>
+                    <motion.div
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        className={feat.side === 'left' ? 'lg:order-2' : ''}
+                    >
+                      <p className="text-xs uppercase tracking-[0.18em] font-semibold text-accent font-body mb-4">
+                        {feat.eyebrow}
+                      </p>
+                      <h2 className="text-3xl lg:text-4xl font-bold font-title text-text-primary leading-snug">
+                        {feat.title}
+                      </h2>
+                      <p className="mt-5 text-text-secondary font-body leading-relaxed text-sm">
+                        {feat.body}
+                      </p>
+                      <div className="mt-7 flex flex-wrap gap-2">
+                        {feat.pills.map((pill) => (
+                            <span
+                                key={pill}
+                                className="text-xs px-3.5 py-1.5 rounded-full bg-card border border-gray-200 text-text-secondary font-body"
+                            >
+                        {pill}
+                      </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                    <ScreenshotBlock feat={feat} />
+                  </div>
+                </div>
+            ))}
+          </section>
+
+          <section className="mt-8 pt-8 border-t border-gray-200 flex flex-wrap items-center gap-2.5">
+            <span className="text-sm text-text-secondary font-body mr-1">Built with</span>
+            {stack.map((tech) => (
+                <span
+                    key={tech}
+                    className="text-xs px-3 py-1.5 rounded-full bg-card border border-gray-200 text-text-secondary font-body"
+                >
               {tech}
             </span>
-          ))}
-        </section>
+            ))}
+          </section>
 
-      </main>
-    </div>
+        </main>
+      </div>
   )
 }

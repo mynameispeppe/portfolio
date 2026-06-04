@@ -93,7 +93,7 @@ export function Projects() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="hidden lg:flex"
           >
-            <Link href="/projects" className="text-accent/80 hover:text-accent transition font-medium text-sm sm:text-base">
+            <Link href="/projects" className="text-accent/80 hover:text-accent transition font-medium text-md">
               <p>View all projects</p>
             </Link>
           </motion.div>
@@ -117,7 +117,7 @@ export function Projects() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-4 lg:hidden"
         >
-          <Link href="/projects" className="text-accent/80 hover:text-accent transition  font-medium text-sm sm:text-base">
+          <Link href="/projects" className="text-accent/80 hover:text-accent transition  font-medium text-md">
             <p>View all projects</p>
           </Link>
         </motion.div>

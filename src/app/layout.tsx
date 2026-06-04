@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Trirong, Dosis } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Giuseppe Milazzo",
@@ -43,6 +44,7 @@ export default function RootLayout({
     <html lang="en">
     <body className={`${trirong.variable} ${dosis.variable}`}>
       {children}
+      <Analytics />
     </body>
     </html>
   );
