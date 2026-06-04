@@ -8,6 +8,7 @@ type Project = {
   title: string;
   subtitle: string;
   description: string;
+  account?: {username: string, password: string},
   stack: string;
   hasGithub: boolean;
   githubUrl?: string;
@@ -20,7 +21,8 @@ const projects: Project[] = [
   {
     title: "Vitae",
     subtitle: "Personal fitness & nutrition tracker",
-    description: "Designed and built a full-stack web app for tracking weekly workout sessions and daily meal plans — handling UI design, UX flows, frontend architecture, and Supabase integration from scratch to production.\n\nTest account: test@vitae.app · vitae1234",
+    description: "Designed and built a full-stack web app for tracking weekly workout sessions and daily meal plans — handling UI design, UX flows, frontend architecture, and Supabase integration from scratch to production.",
+    account: { username: 'test@vitae.app', password: 'vitae1234' },
     stack: "Next.js 14 · TypeScript · Supabase",
     hasGithub: false,
     hasLive: true,
@@ -178,7 +180,36 @@ export function Projects() {
                 {project.description}
               </p>
 
-              {/* Stack + Preview */}
+              {project.account &&
+                  <div className="flex items-center gap-6 mt-4 mb-2">
+                    <div className="flex items-center gap-2">
+                      <Image
+                          src="/icons/user-circle-secondary.svg"
+                          alt="User"
+                          width={16}
+                          height={16}
+                          className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      />
+                      <span className="text-text-secondary text-sm sm:text-base leading-relaxed  whitespace-pre-line font-body">
+                        {project.account.username}
+                     </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Image
+                          src="/icons/lock-narrow-secondary.svg"
+                          alt="Password"
+                          width={16}
+                          height={16}
+                          className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      />
+                      <span className="text-text-secondary text-sm sm:text-base leading-relaxedwhitespace-pre-line font-body">
+                       {project.account.password}
+                     </span>
+                    </div>
+                  </div>
+
+              }
+
               <div className="mt-auto pt-5 border-t border-gray-200 flex items-center justify-between gap-3">
                 <p className="text-accent text-sm sm:text-base font-body">
                   {project.stack}

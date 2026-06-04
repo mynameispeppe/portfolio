@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Navbar from '@/app/components/navbar'
+import React from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -155,13 +156,32 @@ export default function VitaePage() {
             daily nutrition plan — all in one place.
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }} className="mt-8">
-            <a href="https://vitae-ochre.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center gap-2">
+          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }} className="mt-6">
+            <div className="flex  justify-start gap-4">
+              <div className="flex items-center gap-2">
+                <Image
+                    src="/icons/user-circle.svg"
+                    alt="User"
+                    width={16}
+                    height={16}
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                />
+                <span className="font-medium text-text-primary/80">test@vitae.app</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Image
+                    src="/icons/lock-narrow.svg"
+                    alt="Password"
+                    width={16}
+                    height={16}
+                    className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                />
+                <span className="font-medium text-text-primary/80">vitae1234</span>
+              </div>
+            </div>
+            <a href="https://vitae-ochre.vercel.app" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center justify-center gap-2 mt-8">
               Open app
             </a>
-            <p className="mt-3 text-sm text-text-secondary font-body">
-              Test account: <span className="font-medium text-text-primary">test@vitae.app</span> · <span className="font-medium text-text-primary">vitae1234</span>
-            </p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
