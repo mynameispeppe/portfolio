@@ -47,8 +47,8 @@ const experiences: Experience[] = [
 ];
 
 const cardVariants = {
-  hidden: (x: number) => ({ opacity: 0, x }),
-  visible: { opacity: 1, x: 0 },
+  hidden: (custom: { x?: number; y?: number }) => ({ opacity: 0, ...custom }),
+  visible: { opacity: 1, x: 0, y: 0 },
 };
 
 export function Experience() {
@@ -90,7 +90,7 @@ export function Experience() {
 
         {experiences.map((exp, i) => {
           const isEven = i % 2 === 0;
-          const xDir = isMobile ? 60 : isEven ? -60 : 60;
+          const animDir = isMobile ? { y: 40 } : isEven ? { x: -60 } : { x: 60 };
 
           return (
             <div key={i} className="relative flex items-start mb-10 lg:mb-14">
@@ -106,14 +106,14 @@ export function Experience() {
 
               {/* Card */}
               <motion.div
-                custom={xDir}
+                custom={animDir}
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className={[
-                  'ml-10 w-full lg:ml-0 lg:w-[calc(50%-2.5rem)]',
+                  'ml-10 w-[calc(100%-2.5rem)] lg:ml-0 lg:w-[calc(50%-2.5rem)]',
                   isEven ? 'lg:mr-auto lg:pr-6' : 'lg:ml-auto lg:pl-6',
                 ].join(' ')}
               >

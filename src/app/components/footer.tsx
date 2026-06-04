@@ -4,7 +4,7 @@ export function Footer() {
     return (
         <footer className="bg-transparent text-text-secondary">
             <div className="py-4">
-                <p className="text-sm md:text-md text-center">
+                <p className="text-sm text-center">
                     &copy; {currentYear} Giuseppe Milazzo
                 </p>
             </div>

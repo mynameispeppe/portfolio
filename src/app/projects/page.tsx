@@ -13,9 +13,25 @@ type Project = {
   githubUrl?: string
   hasLive: boolean
   liveUrl?: string
+  hasPreview?: boolean
+  previewSlug?: string
 }
 
 const projects: Project[] = [
+  {
+    title: 'Vitae',
+    subtitle: 'Personal fitness & nutrition tracker',
+    descriptions: [
+      'Designed and built a full-stack web app for tracking weekly workout sessions and daily meal plans — handling UI design, UX flows, frontend architecture, and Supabase integration from scratch to production deployment.',
+      'Test account: test@vitae.app · vitae1234',
+    ],
+    stack: 'Next.js 14 · TypeScript · Supabase',
+    hasGithub: false,
+    hasLive: true,
+    liveUrl: 'https://vitae-ochre.vercel.app/',
+    hasPreview: true,
+    previewSlug: 'vitae',
+  },
   {
     title: 'GIS Viewer Platform',
     subtitle: 'Angular-based cartographic panel for electrical grid management',
@@ -94,7 +110,7 @@ export default function ProjectsPage() {
       <main className="pt-24 pb-24 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
 
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-text-secondary font-body mb-10">
+        <div className="flex items-center gap-2 text-md text-text-secondary font-body mb-10">
           <Link href="/" className="hover:text-text-primary transition flex items-center gap-1">
             <Image src="/icons/arrow-left-logo.svg" alt="" width={12} height={12} />
             Home
@@ -164,10 +180,20 @@ export default function ProjectsPage() {
                 ))}
               </div>
 
-              {/* Stack */}
-              <p className="mt-auto pt-6 text-sm text-accent font-body">
-                {project.stack}
-              </p>
+              {/* Stack + Preview */}
+              <div className="mt-auto pt-5 border-t border-gray-200 flex items-center justify-between gap-3">
+                <p className="text-sm text-accent font-body">
+                  {project.stack}
+                </p>
+                {project.hasPreview && project.previewSlug && (
+                  <Link
+                    href={`/projects/${project.previewSlug}`}
+                    className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-full border border-accent text-accent hover:bg-accent hover:text-white transition font-body"
+                  >
+                    Preview
+                  </Link>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>

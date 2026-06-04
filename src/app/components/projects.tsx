@@ -13,8 +13,21 @@ type Project = {
   githubUrl?: string;
   hasLive: boolean;
   liveUrl?: string;
+  hasPreview?: boolean;
+  previewSlug?: string;
 };
 const projects: Project[] = [
+  {
+    title: "Vitae",
+    subtitle: "Personal fitness & nutrition tracker",
+    description: "Designed and built a full-stack web app for tracking weekly workout sessions and daily meal plans — handling UI design, UX flows, frontend architecture, and Supabase integration from scratch to production.\n\nTest account: test@vitae.app · vitae1234",
+    stack: "Next.js 14 · TypeScript · Supabase",
+    hasGithub: false,
+    hasLive: true,
+    liveUrl: "https://vitae-ochre.vercel.app/",
+    hasPreview: true,
+    previewSlug: "vitae",
+  },
   {
     title: "GIS Viewer Platform",
     subtitle: "Angular-based cartographic panel for electrical grid management",
@@ -39,16 +52,7 @@ const projects: Project[] = [
     hasGithub: true,
     githubUrl: "https://github.com/mynameispeppe/Todo",
     hasLive: false
-  },
-  {
-    title: "Eurosplendore Website",
-    subtitle: "Corporate website for a local business",
-    description: "Designed and implemented a fully responsive site from Figma prototype to production deployment.",
-    stack: "Next.js · Figma · Responsive Design · Deployment",
-    hasGithub: false,
-    hasLive: true,
-    liveUrl: 'https://www.eurosplendore.it/'
-  },
+  }
 ];
 
 export function Projects() {
@@ -124,7 +128,7 @@ export function Projects() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 md:mt-12">
           {projects.map((project, index) => (
-            <div key={index} className="flex flex-col rounded-[30px] squircle bg-card p-8 min-h-70 border border-gray-200">
+            <div key={index} className="flex flex-col rounded-[30px] squircle bg-card px-8 py-4 min-h-70 border border-gray-200">
               <div className="flex items-center justify-between mb-1 gap-3">
                 <p className="text-xl sm:text-2xl font-title text-text-primary mt-2 sm:mt-3">
                   {project.title}
@@ -174,10 +178,20 @@ export function Projects() {
                 {project.description}
               </p>
 
-              {/* Stack */}
-              <p className="text-accent mt-auto text-sm sm:text-base  font-body">
-                {project.stack}
-              </p>
+              {/* Stack + Preview */}
+              <div className="mt-auto pt-5 border-t border-gray-200 flex items-center justify-between gap-3">
+                <p className="text-accent text-sm sm:text-base font-body">
+                  {project.stack}
+                </p>
+                {project.hasPreview && project.previewSlug && (
+                  <Link
+                    href={`/projects/${project.previewSlug}`}
+                    className="shrink-0 text-xs sm:text-sm font-medium px-3 py-1.5 rounded-full border border-accent text-accent hover:bg-accent hover:text-white transition font-body"
+                  >
+                    Preview
+                  </Link>
+                )}
+              </div>
 
             </div>
           ))}

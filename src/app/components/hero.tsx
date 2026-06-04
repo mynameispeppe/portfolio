@@ -49,13 +49,13 @@ export function Hero() {
               Hello<span className="text-accent">.</span>
             </motion.h1>
 
-            <motion.h1
+            <motion.h2
               variants={itemVariants}
               transition={{ duration: 0.6 }}
               className="mt-2 text-3xl sm:text-4xl md:text-5xl font-title text-text-primary"
             >
               I&apos;m a <span className="text-accent">Frontend</span> developer
-            </motion.h1>
+            </motion.h2>
 
             <motion.p
               variants={itemVariants}

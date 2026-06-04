@@ -45,7 +45,7 @@ export function About() {
             <div className="flex items-center">
               <Image
                 src="/icons/cake.svg"
-                alt="GitHub repository"
+                alt="Data di nascita"
                 width={16}
                 height={16}
                 className="w-4 h-4 sm:w-4.5 sm:h-4.5"
@@ -57,7 +57,7 @@ export function About() {
             <div className="flex items-center ml-4">
               <Image
                 src="/icons/location.svg"
-                alt="GitHub repository"
+                alt="Posizione"
                 width={16}
                 height={16}
                 className="w-4 h-4 sm:w-4.5 sm:h-4.5"
@@ -68,7 +68,7 @@ export function About() {
             </div>
           </div>
 
-          <div className="mt-4 space-y-2 text-text-secondary text-base sm:text-lg leading-relaxed font-body">
+          <div className="mt-4 space-y-2 text-text-secondary text-base leading-relaxed font-body">
             <p>I care a lot about making things that look good and feel right for everyone, not just some users.</p>
             <p>I&apos;m always curious and love learning from the people and places around me.</p>
             <p>Gaming, traveling and sport keep me going the rest of the time.</p>
@@ -90,7 +90,7 @@ export function About() {
           <hr className="mt-6 border-text-primary/10" />
 
           {/* Quote */}
-          <p className="mt-5 text-text-secondary text-base sm:text-lg leading-relaxed font-title">
+          <p className="mt-5 text-text-secondary text-base leading-relaxed font-title">
             &ldquo;I always want to learn and push myself, not just in games but in real life. One day I want to build something millions of people will use.&rdquo;
           </p>
         </div>

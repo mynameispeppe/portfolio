@@ -41,7 +41,7 @@ export function Contacts() {
           <motion.p
             variants={variants}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-5 text-lg sm:text-xl text-text-secondary font-body"
+            className="mt-5 text-lg text-text-secondary font-body"
           >
             I&apos;m currently open to new opportunities and collaborations
           </motion.p>
