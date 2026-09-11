@@ -1,73 +1,50 @@
 'use client'
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useDict } from '@/i18n/DictContext'
 
-const email = 'giuseppemilazzo.92@outlook.it';
+const email = 'giuseppemilazzo.92@outlook.it'
 
 export function Contacts() {
-  const variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const dict = useDict()
+  const c = dict.contact
 
   return (
-    <section
-      id="contacts" className="w-full min-h-screen  flex flex-col bg-background px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 py-12">
-      <div className="relative flex-1 max-h-8/12  rounded-[30px] squircle overflow-hidden flex items-center justify-center">
-        <Image
-          src="/images/contact.jpg"
-          alt=""
-          fill
-          className="object-cover object-center"
-          priority={false}
-        />
-
-        {/* Glass container */}
+    <section id="contacts" className="pt-12 pb-10 md:pt-28 md:pb-10">
+      <div className="px-6 max-w-7xl mx-auto">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="relative z-10 w-full max-w-2xl mx-auto px-6 py-12 sm:px-12 sm:py-16 rounded-3xl squircle text-center"
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.08 }}
+          transition={{ type: 'spring', stiffness: 55, damping: 18, mass: 1 }}
+          className="relative w-full overflow-hidden"
+          style={{ borderRadius: 22, height: 'clamp(420px, 70vw, 580px)' }}
         >
-          <motion.h2
-            variants={variants}
-            transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold font-title text-text-primary"
-          >
-            Let&apos;s build something <span className="text-accent">solid.</span>
-          </motion.h2>
+          <Image src="/images/contact.jpg" alt={c.image_alt} fill className="object-cover object-center" />
 
-          <motion.p
-            variants={variants}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-5 text-lg text-text-secondary font-body"
-          >
-            I&apos;m currently open to new opportunities and collaborations
-          </motion.p>
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
 
-          <motion.div
-            variants={variants}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <a
+          <div className="absolute inset-x-0 bottom-0 flex flex-col sm:flex-row sm:items-end sm:justify-between px-6 pb-8 gap-6">
+            <div>
+              <h2 className="font-display font-normal" style={{ fontSize: 'clamp(28px, 8vw, 48px)', lineHeight: 1.2, letterSpacing: '-0.48px', color: '#ffffff' }}>
+                {c.heading_line1}<br />{c.heading_line2}
+              </h2>
+            </div>
+
+            <motion.a
               href={`mailto:${email}`}
-              className="btn-primary"
+              className="inline-flex self-start sm:self-end items-center font-body shrink-0 sm:ml-6"
+              style={{ fontSize: 14, fontWeight: 500, lineHeight: 1.71, background: '#ffffff', color: '#17171c', borderRadius: 32, padding: '8px 20px' }}
+              whileHover={{ scale: 1.04, y: -1, boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              Start a conversation
-            </a>
-            <a
-              href="https://www.linkedin.com/in/giuseppe-milazzo-b70236153/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              Join me on LinkedIn
-            </a>
-          </motion.div>
+              {c.cta_email}
+            </motion.a>
+          </div>
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

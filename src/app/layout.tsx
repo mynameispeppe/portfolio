@@ -1,51 +1,31 @@
-import type { Metadata } from "next";
-import { Trirong, Dosis } from "next/font/google";
-import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import type { Metadata } from 'next'
+import { Space_Grotesk, Geist } from 'next/font/google'
+import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
-  title: "Giuseppe Milazzo",
-  description: "Portfolio of Giuseppe Milazzo, Angular frontend developer based in Pescara, Italy. I build scalable and maintainable web applications.",
-  keywords: ["Angular", "Frontend Developer", "Web Developer", "Portfolio", "Giuseppe Milazzo", "Pescara"],
-  authors: [{ name: "Giuseppe Milazzo" }],
-  openGraph: {
-    title: "Giuseppe Milazzo — Frontend Developer",
-    description: "I build scalable and maintainable Angular applications. Based in Pescara, Italy.",
-    url: "https://giuseppemilazzo.dev",
-    siteName: "Giuseppe Milazzo",
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Giuseppe Milazzo — Angular Developer",
-    description: "I build scalable and maintainable Angular applications.",
-  },
-};
+  title: 'Giuseppe Milazzo',
+}
 
-const trirong = Trirong({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-trirong",
-});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-space-grotesk',
+})
 
-const dosis = Dosis({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-dosis",
-});
+const geist = Geist({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-geist',
+})
 
-export default function RootLayout({
-                                     children,
-                                   }: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-    <body className={`${trirong.variable} ${dosis.variable}`}>
-      {children}
-      <Analytics />
-    </body>
+      <body className={`${spaceGrotesk.variable} ${geist.variable}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
-  );
+  )
 }

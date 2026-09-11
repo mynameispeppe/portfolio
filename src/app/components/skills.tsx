@@ -1,69 +1,69 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-const skillsData = [
-    { name: 'Angular',      logo: '/images/brands/angular.svg' },
-    { name: 'TypeScript',   logo: '/images/brands/typescript.svg' },
-    { name: 'HTML5',        logo: '/images/brands/html5.svg' },
-    { name: 'CSS3',         logo: '/images/brands/css3.svg' },
-    { name: 'Sass',         logo: '/images/brands/sass.svg' },
-    { name: 'ESLint',       logo: '/images/brands/eslint.svg' },
-    { name: 'Karma',        logo: '/images/brands/karma.svg' },
-    { name: 'Cypress',      logo: '/images/brands/cypress.svg' },
-    { name: 'React',        logo: '/images/brands/react.svg' },
-    { name: 'Next.js',      logo: '/images/brands/nextjs.svg' },
-    { name: 'Tailwind CSS', logo: '/images/brands/tailwindcss.svg' },
-    { name: 'Figma',        logo: '/images/brands/figma.svg' },
-    { name: 'Git',          logo: '/images/brands/github.svg' },
-    { name: 'npm',          logo: '/images/brands/npm.svg' },
-];
+const skills = [
+  { name: 'Angular',      logo: '/images/devicons/angular.svg' },
+  { name: 'TypeScript',   logo: '/images/devicons/typescript.svg' },
+  { name: 'HTML5',        logo: '/images/devicons/html5.svg' },
+  { name: 'CSS3',         logo: '/images/devicons/css3.svg' },
+  { name: 'Sass',         logo: '/images/devicons/sass.svg' },
+  { name: 'React',        logo: '/images/devicons/react.svg' },
+  { name: 'Next.js',      logo: '/images/devicons/nextjs.svg' },
+  { name: 'Tailwind CSS', logo: '/images/devicons/tailwindcss.svg' },
+  { name: 'Figma',        logo: '/images/devicons/figma.svg' },
+  { name: 'GitHub',       logo: '/images/devicons/github.svg' },
+  { name: 'ESLint',       logo: '/images/devicons/eslint.svg' },
+  { name: 'Cypress',      logo: '/images/devicons/cypress.svg' },
+]
 
-export function Skills() {
-  const [paused, setPaused] = useState(false);
+export function Skills({ aria = 'Tech skills' }: { aria?: string }) {
+  const [paused, setPaused] = useState(false)
+  const [reduced, setReduced] = useState(false)
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === ' ') {
-      e.preventDefault();
-      setPaused(p => !p);
-    }
-  };
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduced(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   return (
-    <div className="hidden md:block relative w-full overflow-hidden py-4">
-
-      {/* fade left */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-linear-to-r from-background to-transparent z-10" />
-
-      {/* fade right */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-linear-to-l from-background to-transparent z-10" />
+    <div className="relative w-full overflow-hidden py-1">
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10"
+        style={{ background: 'linear-gradient(to right, #FAFAF9, transparent)' }}
+      />
+      <div
+        className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10"
+        style={{ background: 'linear-gradient(to left, #FAFAF9, transparent)' }}
+      />
 
       <div
-        className="flex w-max items-center gap-16 animate-marquee"
-        style={{ animationPlayState: paused ? 'paused' : 'running' }}
+        className="flex w-max items-center gap-10 animate-marquee"
+        style={{ animationPlayState: paused || reduced ? 'paused' : 'running' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
         role="region"
-        aria-label="Tech skills carousel — press Space to pause"
+        aria-label={aria}
       >
-        {[...skillsData, ...skillsData].map((skill, index) => (
-          <div key={index} className="flex-none flex items-center justify-center h-9">
+        {[...skills, ...skills].map((skill, i) => (
+          <div key={i} className="flex-none flex items-center h-7" aria-hidden={i >= skills.length}>
             <Image
               src={skill.logo}
-              alt={skill.name}
-              width={120}
-              height={36}
-              className="h-9 w-auto opacity-60 hover:opacity-100 transition duration-300"
+              alt={i < skills.length ? skill.name : ''}
+              width={28}
+              height={28}
+              className="h-7 w-auto transition-all duration-300"
+              style={{ opacity: 0.55, filter: 'brightness(0)' }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '1' }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '0.55' }}
             />
           </div>
         ))}
       </div>
-
     </div>
-  );
+  )
 }

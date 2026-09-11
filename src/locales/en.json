@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "title": "Giuseppe Milazzo",
+    "description": "Portfolio of Giuseppe Milazzo, Angular frontend developer based in Pescara, Italy. I work mainly with Angular and TypeScript.",
+    "keywords": ["Angular", "Frontend Developer", "Web Developer", "Portfolio", "Giuseppe Milazzo", "Pescara"],
+    "og_title": "Giuseppe Milazzo — Frontend Developer",
+    "og_description": "Angular frontend developer based in Pescara, Italy.",
+    "twitter_title": "Giuseppe Milazzo — Angular Developer",
+    "twitter_description": "Angular frontend developer based in Pescara, Italy."
+  },
+  "nav": {
+    "logo": "Giuseppe Milazzo",
+    "links": {
+      "projects": "Projects",
+      "experience": "About",
+      "contact": "Contact"
+    },
+    "cta": "Get in touch"
+  },
+  "mobile_nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "experience": "About",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Giuseppe Milazzo",
+    "typewriter": [
+      "Frontend Developer",
+      "Angular Developer",
+      "Passionate about Design"
+    ],
+    "caption": "Specialized in Angular and TypeScript. Focused on interfaces that work well and feel good to use.",
+    "cta_cv": "Download Resume",
+    "skills_aria": "Tech skills"
+  },
+  "projects": {
+    "section_heading": "What I've built",
+    "aria_carousel": "Projects carousel",
+    "aria_prev": "Previous project",
+    "aria_next": "Next project",
+    "aria_dots": "Project slides",
+    "cta_view": "View project",
+    "cta_wip": "Work in progress",
+    "cta_enterprise": "Enterprise",
+    "items": [
+      {
+        "title": "Vitae",
+        "subtitle": "Personal fitness & nutrition tracker",
+        "description": "Designed and built a web app for tracking weekly workout sessions and daily meal plans, handling UI design, frontend architecture, and Supabase integration.",
+        "tags": ["Figma", "Next.js", "TypeScript"]
+      },
+      {
+        "title": "GIS Viewer Platform",
+        "subtitle": "Cartographic panel for electrical grid management",
+        "description": "I contribute to the frontend of an Angular-based GIS platform for visualizing and managing electrical networks across multiple countries, within an Agile team. I build new interfaces and redesign existing ones, focusing on user experience and performance.",
+        "tags": ["Figma", "NgRx", "Material", "Karma"]
+      },
+      {
+        "title": "Project Management Panel",
+        "subtitle": "Platform for project lifecycle management",
+        "description": "I led the full UI redesign of an enterprise platform. Starting from an analysis of existing usage patterns to identify pain points, I redesigned flows and interface from Figma to production, and structured the frontend architecture with standalone components and NgRx, within a small Agile team.",
+        "tags": ["Figma", "Angular", "Karma"]
+      },
+      {
+        "title": "Angular Todo App",
+        "subtitle": "Task management app with Auth0",
+        "description": "A side project to keep up with the latest Angular releases. Auth0 authentication and a mock REST API via json-server.",
+        "tags": ["Figma", "NgRx"]
+      },
+      {
+        "title": "Eurosplendore Website",
+        "subtitle": "Corporate website for a local business",
+        "description": "Led the full process from Figma prototype to production, building reusable Next.js components and refining the interface based on client feedback.",
+        "tags": ["Responsive"]
+      },
+      {
+        "title": "B&B iMori Website",
+        "subtitle": "Landing page for a bed & breakfast",
+        "description": "Designed and built the website for a bed & breakfast, from Figma prototype to deployment, with cross-browser compatibility.",
+        "tags": ["HTML", "CSS"]
+      }
+    ]
+  },
+  "about": {
+    "section_heading": "About me",
+    "avatar_alt": "Giuseppe Milazzo",
+    "name": "Giuseppe Milazzo",
+    "birthday": "31/07/1992",
+    "location": "Pescara, Italy",
+    "aria_github": "GitHub",
+    "aria_linkedin": "LinkedIn",
+    "cta_cv": "Download Resume",
+    "bio": [
+      "I care about making things that look good and feel right.",
+      "Curious by nature, always looking for the most direct way to turn a complex idea into something usable.",
+      "Gaming, traveling, and sports fill the rest of the time."
+    ],
+    "interests": ["Gaming", "Travel", "Sports", "Design", "Open Source"],
+    "experience": [
+      {
+        "date": "2022 — Present",
+        "role": "Angular Consultant",
+        "company": "Indra Italia",
+        "about": "Frontend design and development of an Angular-based GIS platform for managing and mapping electrical networks across multiple countries, within an Agile team. I worked on architecture, NgRx state management, and performance.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material · Figma"
+      },
+      {
+        "date": "2021 — 2022",
+        "role": "Angular Consultant",
+        "company": "Herzum Software",
+        "about": "Led the full UX/UI redesign of an enterprise management platform, restructuring the frontend architecture and refactoring core modules to improve maintainability.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material · Figma"
+      },
+      {
+        "date": "2020 — 2021",
+        "role": "Frontend Developer",
+        "company": "Net Service",
+        "about": "Built and maintained a back-office system for data management across multiple mobile applications, handling user accounts, roles, and permissions.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material"
+      },
+      {
+        "date": "2019 — 2020",
+        "role": "Frontend Developer",
+        "company": "Smartourism",
+        "about": "Built the frontend of a web application for the tourism sector, implementing interactive UI components and integrating REST APIs with a modular Angular architecture.",
+        "stack": "Angular · TypeScript · RxJS · Angular Material"
+      }
+    ]
+  },
+  "contact": {
+    "heading_line1": "Let's build",
+    "heading_line2": "something solid.",
+    "image_alt": "Get in touch",
+    "cta_email": "Get in touch"
+  },
+  "footer": {
+    "copyright": "Giuseppe Milazzo"
+  }
+}

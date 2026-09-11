@@ -1,84 +1,145 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useDict } from '@/i18n/DictContext'
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-  const isHome = pathname === "/";
+  const dict = useDict()
+  const [scrolled, setScrolled] = useState(false)
+  const [activeId, setActiveId] = useState('')
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const lang = pathname.split('/')[1] ?? 'it'
+  const isHome = pathname === `/${lang}` || pathname === `/${lang}/`
+
+  const navLinks = [
+    { id: 'projects',    label: dict.nav.links.projects },
+    { id: 'experiences', label: dict.nav.links.experience },
+    { id: 'contacts',    label: dict.nav.links.contact },
+  ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
-    window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    if (!isHome) return
+    const ids = ['hero', 'projects', 'experiences', 'contacts']
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveId(e.target.id) }),
+      { threshold: 0.4 }
+    )
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) observer.observe(el) })
+    return () => observer.disconnect()
+  }, [isHome])
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
-  const prefix = isHome ? "" : "/";
-  const navLinks = [
-    { href: `${prefix}#projects`, label: "Projects" },
-    { href: `${prefix}#experiences`, label: "Experiences" },
-    { href: `${prefix}#about`, label: "About me" },
-    { href: `${prefix}#contacts`, label: "Contact" },
-  ];
+  const toggleLang = () => {
+    const next = lang === 'en' ? 'it' : 'en'
+    document.cookie = `locale=${next};path=/;max-age=31536000`
+    router.push(pathname.replace(`/${lang}`, `/${next}`))
+  }
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/60 backdrop-blur-md" : ""
-      }`}
+    <header
+      className="fixed left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        top: 0,
+        background: scrolled ? 'rgba(250,250,249,0.88)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+      }}
     >
-      <div className="px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 mx-auto">
-        <div className="flex items-center justify-between h-16 md:py-2 lg:py-2">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center h-14">
 
-          <div className="flex items-center text-text-primary font-bold">
-            <Image
-              src="/icons/arrow-left-logo.svg"
-              alt=""
-              width={16}
-              height={16}
-            />
-            <span className="text-xl font-title">Giuseppe Milazzo</span>
-            <Image
-              className="mt-1"
-              src="/icons/arrow-right-logo.svg"
-              alt=""
-              width={16}
-              height={16}
-            />
-          </div>
+          {/* Logo */}
+          <a
+            href={isHome ? undefined : `/${lang}`}
+            onClick={isHome ? (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) } : undefined}
+            className="flex items-center gap-0.5 group cursor-pointer"
+            style={{ textDecoration: 'none' }}
+          >
+            <span
+              className="font-display font-normal group-hover:opacity-60 transition-opacity"
+              style={{ fontSize: 14, lineHeight: 1.4, letterSpacing: 0, color: '#17171c' }}
+            >
+              <span style={{ color: '#93939f' }}>&lt; </span>
+              {dict.nav.logo}
+              <span style={{ color: '#93939f' }}> &gt;</span>
+            </span>
+          </a>
 
-          <div className="items-center space-x-8 hidden md:block font-medium">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="
-                  relative text-base font-medium transition-colors duration-300 font-body
-                  after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-0.5 after:w-0
-                  text-text-primary/70
-                  after:bg-accent after:transition-all after:duration-300 hover:after:w-full
-                  hover:text-text-primary
-                "
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Nav links */}
+          {isHome && (
+            <nav className="hidden lg:flex items-center justify-center gap-6 flex-1">
+              {navLinks.map((link) => {
+                const isActive = activeId === link.id
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollTo(link.id)}
+                    className="font-body transition-colors"
+                    style={{
+                      fontSize: 12,
+                      lineHeight: 1.4,
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      color: isActive ? '#17171c' : '#93939f',
+                      fontWeight: 400,
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                    }}
+                  >
+                    {link.label}
+                  </button>
+                )
+              })}
+            </nav>
+          )}
+
+          {/* Right: lang toggle */}
+          <div className="flex items-center justify-end gap-0 ml-auto">
+            {(['it', 'en'] as const).map((l, i) => {
+              const isActive = lang === l
+              return (
+                <span key={l} className="flex items-center">
+                  {i > 0 && (
+                    <span className="font-body select-none" style={{ fontSize: 12, color: '#d9d9dd', padding: '0 4px' }}>|</span>
+                  )}
+                  <button
+                    onClick={() => { if (!isActive) toggleLang() }}
+                    className="font-body transition-colors"
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 400,
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      color: isActive ? '#17171c' : '#93939f',
+                      background: 'none',
+                      border: 'none',
+                      cursor: isActive ? 'default' : 'pointer',
+                      padding: '2px 4px',
+                    }}
+                  >
+                    {l}
+                  </button>
+                </span>
+              )
+            })}
           </div>
 
         </div>
       </div>
-    </motion.nav>
-  );
+    </header>
+  )
 }

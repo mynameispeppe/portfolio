@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "title": "Giuseppe Milazzo",
+    "description": "Portfolio di Giuseppe Milazzo, sviluppatore frontend Angular con sede a Pescara, Italia. Lavoro principalmente con Angular e TypeScript.",
+    "keywords": ["Angular", "Sviluppatore Frontend", "Web Developer", "Portfolio", "Giuseppe Milazzo", "Pescara"],
+    "og_title": "Giuseppe Milazzo — Frontend Developer",
+    "og_description": "Sviluppatore frontend Angular con sede a Pescara, Italia.",
+    "twitter_title": "Giuseppe Milazzo — Angular Developer",
+    "twitter_description": "Sviluppatore frontend Angular con sede a Pescara, Italia."
+  },
+  "nav": {
+    "logo": "Giuseppe Milazzo",
+    "links": {
+      "projects": "Progetti",
+      "experience": "Chi sono",
+      "contact": "Contatti"
+    },
+    "cta": "Scrivimi"
+  },
+  "mobile_nav": {
+    "home": "Home",
+    "projects": "Progetti",
+    "experience": "Chi sono",
+    "about": "Chi sono",
+    "contact": "Contatti"
+  },
+  "hero": {
+    "name": "Giuseppe Milazzo",
+    "typewriter": [
+      "Frontend Developer",
+      "Angular Developer",
+      "Appassionato di Design"
+    ],
+    "caption": "Specializzato in Angular e TypeScript. Realizzo interfacce che funzionano bene e si usano volentieri.",
+    "cta_cv": "Scarica il Curriculum",
+    "skills_aria": "Competenze tecniche"
+  },
+  "projects": {
+    "section_heading": "Quello che ho fatto",
+    "aria_carousel": "Carosello progetti",
+    "aria_prev": "Progetto precedente",
+    "aria_next": "Progetto successivo",
+    "aria_dots": "Diapositive progetti",
+    "cta_view": "Vedi il progetto",
+    "cta_wip": "Lavori in corso",
+    "cta_enterprise": "Enterprise",
+    "items": [
+      {
+        "title": "Vitae",
+        "subtitle": "Tracker personale per fitness e nutrizione",
+        "description": "Ho progettato e sviluppato una web app per tracciare sessioni di allenamento settimanali e piani alimentari, gestendo design UI, architettura frontend e integrazione con Supabase.",
+        "tags": ["Figma", "Next.js", "TypeScript"]
+      },
+      {
+        "title": "GIS Viewer Platform",
+        "subtitle": "Pannello cartografico per la gestione della rete elettrica",
+        "description": "Contribuisco al frontend di una piattaforma GIS in Angular per visualizzare e gestire reti elettriche in più paesi, in un team Agile. Sviluppo nuove interfacce e ridisegno quelle esistenti, curando l'esperienza utente e le performance.",
+        "tags": ["Figma", "NgRx", "Material", "Karma"]
+      },
+      {
+        "title": "Project Management Panel",
+        "subtitle": "Piattaforma per la gestione del ciclo di vita dei progetti",
+        "description": "Ho guidato il redesign completo dell'interfaccia di una piattaforma enterprise. Partendo da un'analisi dell'utilizzo esistente per individuare le criticità, ho ridisegnato flussi e interfaccia da Figma alla produzione, strutturando l'architettura frontend con componenti standalone e NgRx, in un piccolo team Agile.",
+        "tags": ["Figma", "Angular", "Karma"]
+      },
+      {
+        "title": "Angular Todo App",
+        "subtitle": "App per la gestione delle attività con Auth0",
+        "description": "Progetto personale per tenermi aggiornato sulle nuove versioni di Angular. Autenticazione con Auth0 e API REST mock via json-server.",
+        "tags": ["Figma", "NgRx"]
+      },
+      {
+        "title": "Eurosplendore Website",
+        "subtitle": "Sito aziendale per un'attività locale",
+        "description": "Ho seguito l'intero processo dal prototipo Figma alla produzione, costruendo componenti Next.js riutilizzabili e affinando l'interfaccia in base ai feedback del cliente.",
+        "tags": ["Responsive"]
+      },
+      {
+        "title": "B&B iMori Website",
+        "subtitle": "Landing page per un bed & breakfast",
+        "description": "Ho progettato e sviluppato il sito di un bed & breakfast, dal prototipo Figma al deploy, con compatibilità cross-browser.",
+        "tags": ["HTML", "CSS"]
+      }
+    ]
+  },
+  "about": {
+    "section_heading": "Chi sono",
+    "avatar_alt": "Giuseppe Milazzo",
+    "name": "Giuseppe Milazzo",
+    "birthday": "31/07/1992",
+    "location": "Pescara, Italia",
+    "aria_github": "GitHub",
+    "aria_linkedin": "LinkedIn",
+    "cta_cv": "Scarica il Curriculum",
+    "bio": [
+      "Mi importa costruire cose che abbiano un bell'aspetto e che funzionino bene.",
+      "Sono curioso per natura, sempre a cercare il modo più diretto per tradurre un'idea complessa in qualcosa di usabile.",
+      "Nel tempo libero: gaming, viaggi e sport."
+    ],
+    "interests": ["Gaming", "Viaggi", "Sport", "Design", "Open Source"],
+    "experience": [
+      {
+        "date": "2022 — Oggi",
+        "role": "Angular Consultant",
+        "company": "Indra Italia",
+        "about": "Design e sviluppo frontend di una piattaforma GIS in Angular per gestire e mappare reti elettriche in più paesi, in un team Agile. Mi sono occupato di architettura, state management con NgRx e performance.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material · Figma"
+      },
+      {
+        "date": "2021 — 2022",
+        "role": "Angular Consultant",
+        "company": "Herzum Software",
+        "about": "Ho guidato il redesign UX/UI completo di una piattaforma enterprise, ristrutturando l'architettura frontend e facendo refactoring dei moduli core per migliorare la manutenibilità.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material · Figma"
+      },
+      {
+        "date": "2020 — 2021",
+        "role": "Frontend Developer",
+        "company": "Net Service",
+        "about": "Ho costruito e mantenuto un sistema di back-office per la gestione dei dati di più applicazioni mobile, occupandomi di account utente, ruoli e permessi.",
+        "stack": "Angular · TypeScript · NgRx · RxJS · Angular Material"
+      },
+      {
+        "date": "2019 — 2020",
+        "role": "Frontend Developer",
+        "company": "Smartourism",
+        "about": "Ho sviluppato il frontend di una web application per il settore turistico, costruendo componenti UI interattivi e integrando API REST con un'architettura Angular modulare.",
+        "stack": "Angular · TypeScript · RxJS · Angular Material"
+      }
+    ]
+  },
+  "contact": {
+    "heading_line1": "Hai un progetto",
+    "heading_line2": "in mente?",
+    "image_alt": "Contattami",
+    "cta_email": "Scrivimi"
+  },
+  "footer": {
+    "copyright": "Giuseppe Milazzo"
+  }
+}
