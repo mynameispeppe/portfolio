@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
 const skills = [
@@ -15,52 +15,52 @@ const skills = [
   { name: 'Figma',        logo: '/images/devicons/figma.svg' },
   { name: 'GitHub',       logo: '/images/devicons/github.svg' },
   { name: 'ESLint',       logo: '/images/devicons/eslint.svg' },
+  { name: 'Karma',        logo: '/images/devicons/karma.svg' },
   { name: 'Cypress',      logo: '/images/devicons/cypress.svg' },
+  { name: 'npm',          logo: '/images/devicons/npm.svg' },
 ]
 
 export function Skills({ aria = 'Tech skills' }: { aria?: string }) {
   const [paused, setPaused] = useState(false)
-  const [reduced, setReduced] = useState(false)
 
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === ' ') {
+      e.preventDefault()
+      setPaused(p => !p)
+    }
+  }
 
   return (
     <div className="relative w-full overflow-hidden py-1">
-      <div
-        className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10"
-        style={{ background: 'linear-gradient(to right, #FAFAF9, transparent)' }}
-      />
-      <div
-        className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10"
-        style={{ background: 'linear-gradient(to left, #FAFAF9, transparent)' }}
-      />
+      <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10 bg-[linear-gradient(to_right,#FAFAF9,transparent)]" />
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10 bg-[linear-gradient(to_left,#FAFAF9,transparent)]" />
 
       <div
-        className="flex w-max items-center gap-10 animate-marquee"
-        style={{ animationPlayState: paused || reduced ? 'paused' : 'running' }}
+        className="flex w-max animate-marquee"
+        style={{ animationPlayState: paused ? 'paused' : 'running', willChange: 'transform', backfaceVisibility: 'hidden' }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
         role="region"
         aria-label={aria}
       >
-        {[...skills, ...skills].map((skill, i) => (
-          <div key={i} className="flex-none flex items-center h-7" aria-hidden={i >= skills.length}>
-            <Image
-              src={skill.logo}
-              alt={i < skills.length ? skill.name : ''}
-              width={28}
-              height={28}
-              className="h-7 w-auto transition-all duration-300"
-              style={{ opacity: 0.55, filter: 'brightness(0)' }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = '1' }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = '0.55' }}
-            />
+        {[0, 1].map((copy) => (
+          <div key={copy} className="flex items-center gap-[60px] pr-[60px]" aria-hidden={copy === 1}>
+            {skills.map((skill, i) => (
+              <div key={i} className="flex-none flex items-center h-7 w-7">
+                <Image
+                  src={skill.logo}
+                  alt={copy === 0 ? skill.name : ''}
+                  width={28}
+                  height={28}
+                  loading="eager"
+                  className="h-7 w-auto transition-all duration-300 opacity-[0.55] brightness-0 hover:opacity-100"
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>

@@ -7,7 +7,6 @@ import { useDict } from '@/i18n/DictContext'
 export default function Navbar() {
   const dict = useDict()
   const [scrolled, setScrolled] = useState(false)
-  const [activeId, setActiveId] = useState('')
   const pathname = usePathname()
   const router = useRouter()
 
@@ -25,17 +24,6 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  useEffect(() => {
-    if (!isHome) return
-    const ids = ['hero', 'projects', 'experiences', 'contacts']
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveId(e.target.id) }),
-      { threshold: 0.4 }
-    )
-    ids.forEach((id) => { const el = document.getElementById(id); if (el) observer.observe(el) })
-    return () => observer.disconnect()
-  }, [isHome])
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -64,46 +52,27 @@ export default function Navbar() {
           <a
             href={isHome ? undefined : `/${lang}`}
             onClick={isHome ? (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) } : undefined}
-            className="flex items-center gap-0.5 group cursor-pointer"
-            style={{ textDecoration: 'none' }}
+            className="flex items-center gap-0.5 group cursor-pointer no-underline"
           >
-            <span
-              className="font-display font-normal group-hover:opacity-60 transition-opacity"
-              style={{ fontSize: 14, lineHeight: 1.4, letterSpacing: 0, color: '#17171c' }}
-            >
-              <span style={{ color: '#93939f' }}>&lt; </span>
+            <span className="font-display font-normal text-[14px] leading-[1.4] tracking-[0] text-[#17171c] group-hover:opacity-60 transition-opacity">
+              <span className="text-[#93939f]">&lt; </span>
               {dict.nav.logo}
-              <span style={{ color: '#93939f' }}> &gt;</span>
+              <span className="text-[#93939f]"> &gt;</span>
             </span>
           </a>
 
           {/* Nav links */}
           {isHome && (
             <nav className="hidden lg:flex items-center justify-center gap-6 flex-1">
-              {navLinks.map((link) => {
-                const isActive = activeId === link.id
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => scrollTo(link.id)}
-                    className="font-body transition-colors"
-                    style={{
-                      fontSize: 12,
-                      lineHeight: 1.4,
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                      color: isActive ? '#17171c' : '#93939f',
-                      fontWeight: 400,
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: 0,
-                    }}
-                  >
-                    {link.label}
-                  </button>
-                )
-              })}
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollTo(link.id)}
+                  className="font-body text-[12px] leading-[1.4] tracking-[0.06em] uppercase font-normal text-[#93939f] hover:text-[#17171c] transition-colors duration-200 bg-transparent border-none cursor-pointer p-0"
+                >
+                  {link.label}
+                </button>
+              ))}
             </nav>
           )}
 
@@ -114,22 +83,15 @@ export default function Navbar() {
               return (
                 <span key={l} className="flex items-center">
                   {i > 0 && (
-                    <span className="font-body select-none" style={{ fontSize: 12, color: '#d9d9dd', padding: '0 4px' }}>|</span>
+                    <span className="font-body select-none text-[12px] text-[#d9d9dd] px-1">|</span>
                   )}
                   <button
                     onClick={() => { if (!isActive) toggleLang() }}
-                    className="font-body transition-colors"
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 400,
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                      color: isActive ? '#17171c' : '#93939f',
-                      background: 'none',
-                      border: 'none',
-                      cursor: isActive ? 'default' : 'pointer',
-                      padding: '2px 4px',
-                    }}
+                    className={`font-body text-[12px] font-normal tracking-[0.06em] uppercase bg-transparent border-none px-1 py-0.5 transition-colors duration-200 ${
+                      isActive
+                        ? 'text-[#17171c] cursor-default'
+                        : 'text-[#93939f] hover:text-[#17171c] cursor-pointer'
+                    }`}
                   >
                     {l}
                   </button>

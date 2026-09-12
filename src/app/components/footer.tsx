@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer>
       <div className="px-6 max-w-7xl mx-auto py-8 flex justify-center">
-        <p className="font-body text-text-muted" style={{ fontSize: 12, lineHeight: 1.4 }}>
+        <p className="font-body text-text-muted text-[12px] leading-[1.4]">
           &copy; {currentYear} {dict.footer.copyright}
         </p>
       </div>

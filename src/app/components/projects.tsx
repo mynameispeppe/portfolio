@@ -65,19 +65,12 @@ function ProjectCard({
 
   return (
     <div
+      className="rounded-[22px] overflow-hidden h-full flex flex-col bg-white border border-[#f2f2f2] relative"
       style={{
         transform: reduced ? 'none' : `scale(${scale})`,
         opacity,
         transition: reduced ? 'none' : 'transform 0.35s ease, opacity 0.35s ease',
         transformOrigin: 'center center',
-        borderRadius: 22,
-        overflow: 'hidden',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        background: '#ffffff',
-        border: '1px solid #f2f2f2',
-        position: 'relative',
         pointerEvents: active ? 'auto' : 'none',
       }}
       aria-hidden={active ? undefined : true}
@@ -85,63 +78,60 @@ function ProjectCard({
     >
       <div
         aria-hidden="true"
-        style={{
-          position: 'absolute', inset: 0, borderRadius: 22,
-          background: 'radial-gradient(ellipse at 30% 20%, rgba(238,236,231,0.9) 0%, rgba(241,245,255,0.4) 50%, rgba(255,255,255,0) 80%)',
-          filter: 'url(#grainy)', zIndex: 0, pointerEvents: 'none',
-        }}
+        className="absolute inset-0 rounded-[22px] z-0 pointer-events-none bg-[radial-gradient(ellipse_at_30%_20%,rgba(238,236,231,0.9)_0%,rgba(241,245,255,0.4)_50%,rgba(255,255,255,0)_80%)]"
+        style={{ filter: 'url(#grainy)' }}
       />
 
-      <div style={{ padding: 32, display: 'flex', flexDirection: 'column', flex: 1, position: 'relative', zIndex: 1 }}>
+      <div className="p-8 flex flex-col flex-1 relative z-[1]">
 
-        <p className="font-display font-normal text-text-primary" style={{ fontSize: 32, lineHeight: 1.2, letterSpacing: '-0.32px', marginBottom: 6 }}>
+        <p className="font-display font-normal text-text-primary text-[32px] leading-[1.2] tracking-[-0.32px] mb-[6px]">
           {title}
         </p>
-        <p className="font-body" style={{ fontSize: 16, lineHeight: 1.5, color: '#616161', marginBottom: 16 }}>
+        <p className="font-body text-[16px] leading-[1.5] text-[#616161] mb-4">
           {subtitle}
         </p>
-        <p className="font-body text-text-secondary" style={{ fontSize: 16, lineHeight: 1.5, flex: 1, marginBottom: 24 }}>
+        <p className="font-body text-text-secondary text-[16px] leading-[1.5] flex-1 mb-6">
           {description}
         </p>
 
         {/* CTA */}
         {hasLink ? (
-          <div style={{ marginBottom: 20 }}>
+          <div className="mb-5">
             {meta.previewSlug && !meta.liveUrl && !meta.githubUrl ? (
-              <Link href={href} className="font-body" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 500, color: '#17171c', textDecoration: 'none' }}>
+              <Link href={href} className="font-body inline-flex items-center gap-[10px] text-[14px] font-medium text-[#17171c] no-underline">
                 {labelView}
-                <span style={{ width: 28, height: 28, borderRadius: 9999, border: '1px solid #d9d9dd', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0">
                   <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                 </span>
               </Link>
             ) : (
-              <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} className="font-body" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: 14, fontWeight: 500, color: '#17171c', textDecoration: 'none' }}>
+              <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} className="font-body inline-flex items-center gap-[10px] text-[14px] font-medium text-[#17171c] no-underline">
                 {labelView}
-                <span style={{ width: 28, height: 28, borderRadius: 9999, border: '1px solid #d9d9dd', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0">
                   <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                 </span>
               </a>
             )}
           </div>
         ) : meta.wip ? (
-          <div style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-            <span className="font-body" style={{ fontSize: 14, fontWeight: 500, color: '#93939f' }}>{labelWip}</span>
-            <span style={{ width: 28, height: 28, borderRadius: 9999, border: '1px solid #d9d9dd', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#93939f' }}>
+          <div className="mb-5 inline-flex items-center gap-[10px]">
+            <span className="font-body text-[14px] font-medium text-[#93939f]">{labelWip}</span>
+            <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0 text-[#93939f]">
               <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </span>
           </div>
         ) : (
-          <div style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-            <span className="font-body" style={{ fontSize: 14, fontWeight: 500, color: '#17171c' }}>{labelEnterprise}</span>
-            <span style={{ width: 28, height: 28, borderRadius: 9999, border: '1px solid #d9d9dd', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#17171c' }}>
+          <div className="mb-5 inline-flex items-center gap-[10px]">
+            <span className="font-body text-[14px] font-medium text-[#17171c]">{labelEnterprise}</span>
+            <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0 text-[#17171c]">
               <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </span>
           </div>
         )}
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <span key={tag} className="font-body" style={{ fontSize: 12, lineHeight: 1.4, color: '#17171c', background: 'rgba(23,23,28,0.08)', borderRadius: 9999, padding: '4px 12px' }}>
+            <span key={tag} className="font-body text-[12px] leading-[1.4] text-[#17171c] bg-[rgba(23,23,28,0.08)] rounded-full px-3 py-1">
               {tag}
             </span>
           ))}
@@ -206,7 +196,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="py-12 md:py-28">
-      <svg aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
+      <svg aria-hidden="true" className="absolute w-0 h-0">
         <defs>
           <filter id="grainy" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="sRGB">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise" />
@@ -218,13 +208,13 @@ export function Projects() {
       </svg>
 
       <motion.div
-        style={{ marginBottom: 32 }}
+        className="mb-8"
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ type: 'spring', stiffness: 55, damping: 18, mass: 1 }}
       >
-        <h2 className="font-display font-normal text-text-primary" style={{ fontSize: 'clamp(28px, 8vw, 48px)', lineHeight: 1.2, letterSpacing: '-0.48px' }}>
+        <h2 className="font-display font-normal text-text-primary text-[clamp(28px,8vw,48px)] leading-[1.2] tracking-[-0.48px]">
           {p.section_heading}
         </h2>
       </motion.div>
@@ -238,9 +228,9 @@ export function Projects() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
       >
         <div ref={emblaRef} className="overflow-hidden" aria-label={p.aria_carousel} role="region">
-          <div className="flex" style={{ gap: 16 }}>
+          <div className="flex gap-4">
             {p.items.map((item, i) => (
-              <div key={item.title} className="flex-none" style={{ width: 'clamp(300px, 80vw, 580px)' }}>
+              <div key={item.title} className="flex-none w-[clamp(300px,80vw,580px)]">
                 <ProjectCard
                   title={item.title}
                   subtitle={item.subtitle}
@@ -260,22 +250,26 @@ export function Projects() {
         </div>
 
         <button onClick={scrollPrev} disabled={!canPrev} aria-label={p.aria_prev}
-          className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 items-center justify-center w-9 h-9 rounded-full transition-opacity disabled:opacity-20"
-          style={{ border: '1px solid #d9d9dd', background: 'transparent', color: '#212121' }}>
+          className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 items-center justify-center w-9 h-9 rounded-full border border-[#d9d9dd] bg-transparent text-[#212121] transition-opacity disabled:opacity-20">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <button onClick={scrollNext} disabled={!canNext} aria-label={p.aria_next}
-          className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 items-center justify-center w-9 h-9 rounded-full transition-opacity disabled:opacity-20"
-          style={{ border: '1px solid #d9d9dd', background: 'transparent', color: '#212121' }}>
+          className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 items-center justify-center w-9 h-9 rounded-full border border-[#d9d9dd] bg-transparent text-[#212121] transition-opacity disabled:opacity-20">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </motion.div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 24 }} role="tablist" aria-label={p.aria_dots}>
+      <div className="flex items-center justify-center gap-[6px] mt-6" role="tablist" aria-label={p.aria_dots}>
         {p.items.map((_, i) => (
-          <button key={i} onClick={() => emblaApi?.scrollTo(i)} role="tab"
-            aria-selected={i === selectedIndex} aria-label={`${i + 1}`}
-            style={{ width: i === selectedIndex ? 20 : 6, height: 6, borderRadius: 9999, background: i === selectedIndex ? '#17171c' : '#d9d9dd', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 0.3s ease' }}
+          <button
+            key={i}
+            onClick={() => emblaApi?.scrollTo(i)}
+            role="tab"
+            aria-selected={i === selectedIndex}
+            aria-label={`${i + 1}`}
+            className={`h-[6px] rounded-full border-none cursor-pointer p-0 transition-all duration-300 ${
+              i === selectedIndex ? 'w-5 bg-[#17171c]' : 'w-[6px] bg-[#d9d9dd]'
+            }`}
           />
         ))}
       </div>

@@ -28,8 +28,7 @@ export function AboutExperience() {
       <div className="px-6 max-w-7xl mx-auto w-full">
 
         <motion.h2
-          className="font-display font-normal text-text-primary"
-          style={{ fontSize: 'clamp(28px, 8vw, 48px)', lineHeight: 1.2, letterSpacing: '-0.48px', marginBottom: 48 }}
+          className="font-display font-normal text-text-primary text-[clamp(28px,8vw,48px)] leading-[1.2] tracking-[-0.48px] mb-12"
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.08 }}
@@ -38,38 +37,37 @@ export function AboutExperience() {
           {a.section_heading}
         </motion.h2>
 
-        <div className="flex flex-col lg:flex-row" style={{ gap: 80, alignItems: 'flex-start' }}>
+        <div className="flex flex-col lg:flex-row gap-[80px] items-start">
 
           {/* LEFT */}
           <motion.div
-            className="w-full lg:w-2/5"
-            style={{ flexShrink: 0 }}
+            className="w-full lg:w-2/5 shrink-0"
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.08 }}
             transition={{ ...spring, delay: 0.05 }}
           >
-            <div className="lg:sticky" style={{ top: 64 }}>
+            <div className="lg:sticky top-16">
 
               {/* ── MOBILE / TABLET layout (< lg) ── */}
-              <div className="lg:hidden flex flex-col" style={{ gap: 16 }}>
+              <div className="lg:hidden flex flex-col gap-4">
 
                 {/* Row 1: avatar */}
-                <div style={{ position: 'relative', width: 96, height: 96, borderRadius: 9999, border: '1px solid #f2f2f2', overflow: 'hidden', flexShrink: 0 }}>
-                  <Image src="/images/avatar.jpeg" alt={a.avatar_alt} fill className="object-cover" style={{ objectPosition: '50% 35%' }} />
+                <div className="relative w-24 h-24 rounded-full border border-[#f2f2f2] overflow-hidden shrink-0">
+                  <Image src="/images/avatar.jpeg" alt={a.avatar_alt} fill className="object-cover object-[50%_35%]" />
                 </div>
 
                 {/* Row 2: name + social icons */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p className="font-display font-normal text-text-primary" style={{ fontSize: 'clamp(24px, 6vw, 32px)', lineHeight: 1.2, letterSpacing: '-0.32px' }}>
+                <div className="flex items-center justify-between">
+                  <p className="font-display font-normal text-text-primary text-[clamp(24px,6vw,32px)] leading-[1.2] tracking-[-0.32px]">
                     {a.name}
                   </p>
-                  <div style={{ display: 'flex', gap: 8 }}>
+                  <div className="flex gap-2">
                     <motion.a
                       href="https://github.com/mynameispeppe"
                       target="_blank" rel="noopener noreferrer"
                       aria-label={a.aria_github}
-                      style={{ width: 32, height: 32, borderRadius: 9999, border: '1px solid #f2f2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#17171c' }}
+                      className="w-8 h-8 rounded-full border border-[#f2f2f2] flex items-center justify-center text-[#17171c]"
                       whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
@@ -79,7 +77,7 @@ export function AboutExperience() {
                       href="https://www.linkedin.com/in/giuseppe-milazzo-b70236153/"
                       target="_blank" rel="noopener noreferrer"
                       aria-label={a.aria_linkedin}
-                      style={{ width: 32, height: 32, borderRadius: 9999, border: '1px solid #f2f2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#17171c' }}
+                      className="w-8 h-8 rounded-full border border-[#f2f2f2] flex items-center justify-center text-[#17171c]"
                       whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
@@ -89,41 +87,32 @@ export function AboutExperience() {
                 </div>
 
                 {/* Birthday + location */}
-                <div style={{ display: 'flex', gap: 16 }}>
-                  <span className="flex items-center font-body" style={{ fontSize: 14, lineHeight: 1.4, color: '#93939f', gap: 6 }}>
+                <div className="flex gap-4">
+                  <span className="flex items-center gap-[6px] font-body text-[14px] leading-[1.4] text-[#93939f]">
                     <Cake size={13} strokeWidth={1.5} />
                     {a.birthday}
                   </span>
-                  <span className="flex items-center font-body" style={{ fontSize: 14, lineHeight: 1.4, color: '#93939f', gap: 6 }}>
+                  <span className="flex items-center gap-[6px] font-body text-[14px] leading-[1.4] text-[#93939f]">
                     <MapPin size={13} strokeWidth={1.5} />
                     {a.location}
                   </span>
                 </div>
 
                 {/* Bio */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="flex flex-col gap-2">
                   {a.bio.map((line, i) => (
-                    <p key={i} className="font-body" style={{ fontSize: 16, lineHeight: 1.5, color: '#616161' }}>
+                    <p key={i} className="font-body text-[16px] leading-[1.5] text-[#616161]">
                       {line}
                     </p>
                   ))}
                 </div>
 
-                {/* CV button — secondary */}
+                {/* CV button */}
                 <a
                   href="/cv.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body"
-                  style={{
-                    display: 'inline-block',
-                    fontSize: 14,
-                    fontWeight: 500,
-                    color: '#17171c',
-                    textDecoration: 'underline',
-                    textUnderlineOffset: 3,
-                    padding: '8px 0',
-                  }}
+                  className="font-body inline-block text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"
                 >
                   {a.cta_cv}
                 </a>
@@ -133,31 +122,31 @@ export function AboutExperience() {
               {/* ── DESKTOP layout (≥ lg) ── */}
               <div className="hidden lg:block">
 
-                <div className="relative overflow-hidden" style={{ width: 180, height: 240, borderRadius: 16, marginBottom: 20 }}>
-                  <Image src="/images/avatar.jpeg" alt={a.avatar_alt} fill className="object-cover" style={{ objectPosition: '50% 10%' }} />
+                <div className="relative overflow-hidden w-[180px] h-[240px] rounded-[16px] mb-5">
+                  <Image src="/images/avatar.jpeg" alt={a.avatar_alt} fill className="object-cover object-[50%_10%]" />
                 </div>
 
-                <p className="font-display font-normal text-text-primary" style={{ fontSize: 24, lineHeight: 1.3, letterSpacing: 0 }}>
+                <p className="font-display font-normal text-text-primary text-[24px] leading-[1.3]">
                   {a.name}
                 </p>
 
-                <div className="flex flex-wrap" style={{ gap: 16, marginTop: 6 }}>
-                  <span className="flex items-center font-body text-text-muted" style={{ fontSize: 14, lineHeight: 1.4, gap: 6 }}>
+                <div className="flex flex-wrap gap-4 mt-[6px]">
+                  <span className="flex items-center gap-[6px] font-body text-text-muted text-[14px] leading-[1.4]">
                     <Cake size={13} strokeWidth={1.5} />
                     {a.birthday}
                   </span>
-                  <span className="flex items-center font-body text-text-muted" style={{ fontSize: 14, lineHeight: 1.4, gap: 6 }}>
+                  <span className="flex items-center gap-[6px] font-body text-text-muted text-[14px] leading-[1.4]">
                     <MapPin size={13} strokeWidth={1.5} />
                     {a.location}
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
+                <div className="flex gap-2 mt-5">
                   <motion.a
                     href="https://github.com/mynameispeppe"
                     target="_blank" rel="noopener noreferrer"
                     aria-label={a.aria_github}
-                    style={{ width: 32, height: 32, borderRadius: 9999, border: '1px solid #f2f2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#17171c' }}
+                    className="w-8 h-8 rounded-full border border-[#f2f2f2] flex items-center justify-center text-[#17171c]"
                     whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   >
@@ -167,7 +156,7 @@ export function AboutExperience() {
                     href="https://www.linkedin.com/in/giuseppe-milazzo-b70236153/"
                     target="_blank" rel="noopener noreferrer"
                     aria-label={a.aria_linkedin}
-                    style={{ width: 32, height: 32, borderRadius: 9999, border: '1px solid #f2f2f2', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#17171c' }}
+                    className="w-8 h-8 rounded-full border border-[#f2f2f2] flex items-center justify-center text-[#17171c]"
                     whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                   >
@@ -175,9 +164,9 @@ export function AboutExperience() {
                   </motion.a>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 24 }}>
+                <div className="flex flex-col gap-2 mt-6">
                   {a.bio.map((line, i) => (
-                    <p key={i} className={`font-body ${i === 0 ? 'text-text-primary' : 'text-text-secondary'}`} style={{ fontSize: 16, lineHeight: 1.5 }}>
+                    <p key={i} className={`font-body text-[16px] leading-[1.5] ${i === 0 ? 'text-text-primary' : 'text-text-secondary'}`}>
                       {line}
                     </p>
                   ))}
@@ -187,17 +176,7 @@ export function AboutExperience() {
                   href="/cv.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body"
-                  style={{
-                    display: 'inline-block',
-                    marginTop: 24,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    color: '#17171c',
-                    textDecoration: 'underline',
-                    textUnderlineOffset: 3,
-                    padding: '8px 0',
-                  }}
+                  className="font-body inline-block mt-6 text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"
                 >
                   {a.cta_cv}
                 </a>
@@ -211,22 +190,22 @@ export function AboutExperience() {
             {a.experience.map((exp, i) => (
               <motion.div
                 key={i}
+                className="py-6"
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.08 }}
                 transition={{ ...spring, delay: i * 0.08 }}
-                style={{ padding: '24px 0' }}
               >
-                <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: '0 24px', alignItems: 'start' }}>
-                  <p className="font-body text-text-muted" style={{ fontSize: 12, lineHeight: 1.4, letterSpacing: '0.06em', fontVariantNumeric: 'tabular-nums', paddingTop: 3 }}>
+                <div className="grid grid-cols-[110px_1fr] gap-x-6 items-start">
+                  <p className="font-body text-text-muted text-[12px] leading-[1.4] tracking-[0.06em] tabular-nums pt-[3px]">
                     {exp.date}
                   </p>
                   <div>
-                    <p className="font-body text-text-primary" style={{ fontSize: 16, lineHeight: 1.5 }}>
+                    <p className="font-body text-text-primary text-[16px] leading-[1.5]">
                       {exp.role}
-                      <span className="text-text-muted" style={{ fontSize: 14, marginLeft: 8 }}>@ {exp.company}</span>
+                      <span className="text-text-muted text-[14px] ml-2">@ {exp.company}</span>
                     </p>
-                    <p className="font-body text-text-secondary" style={{ fontSize: 16, lineHeight: 1.5, marginTop: 6 }}>
+                    <p className="font-body text-text-secondary text-[16px] leading-[1.5] mt-[6px]">
                       {exp.about}
                     </p>
                   </div>

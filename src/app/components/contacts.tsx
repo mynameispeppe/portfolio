@@ -18,24 +18,22 @@ export function Contacts() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.08 }}
           transition={{ type: 'spring', stiffness: 55, damping: 18, mass: 1 }}
-          className="relative w-full overflow-hidden"
-          style={{ borderRadius: 22, height: 'clamp(420px, 70vw, 580px)' }}
+          className="relative w-full overflow-hidden rounded-[22px] h-[clamp(420px,70vw,580px)]"
         >
-          <Image src="/images/contact.jpg" alt={c.image_alt} fill className="object-cover object-center" />
+          <Image src="/images/contact-test.jpg" alt={c.image_alt} fill className="object-cover object-top" />
 
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)' }} />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.1)_50%,transparent_100%)]" />
 
           <div className="absolute inset-x-0 bottom-0 flex flex-col sm:flex-row sm:items-end sm:justify-between px-6 pb-8 gap-6">
             <div>
-              <h2 className="font-display font-normal" style={{ fontSize: 'clamp(28px, 8vw, 48px)', lineHeight: 1.2, letterSpacing: '-0.48px', color: '#ffffff' }}>
+              <h2 className="font-display font-normal text-white text-[clamp(28px,8vw,48px)] leading-[1.2] tracking-[-0.48px]">
                 {c.heading_line1}<br />{c.heading_line2}
               </h2>
             </div>
 
             <motion.a
               href={`mailto:${email}`}
-              className="inline-flex self-start sm:self-end items-center font-body shrink-0 sm:ml-6"
-              style={{ fontSize: 14, fontWeight: 500, lineHeight: 1.71, background: '#ffffff', color: '#17171c', borderRadius: 32, padding: '8px 20px' }}
+              className="inline-flex self-start sm:self-end items-center font-body shrink-0 sm:ml-6 text-[14px] font-medium leading-[1.71] bg-white text-[#17171c] rounded-[32px] px-5 py-2 no-underline"
               whileHover={{ scale: 1.04, y: -1, boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}

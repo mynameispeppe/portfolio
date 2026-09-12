@@ -1,36 +1,19 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Home, LayoutGrid, User, Mail } from 'lucide-react'
+import { useState } from 'react'
 import { useDict } from '@/i18n/DictContext'
-
-const allSectionIds = ['hero', 'projects', 'experiences', 'contacts']
+import { Home, FileBracesCorner, CircleUser, MessageCircle } from 'lucide-react'
 
 export default function MobileNav() {
   const dict = useDict()
-  const [activeId, setActiveId] = useState<string>('hero')
+  const [activeId, setActiveId] = useState('hero')
 
   const navLinks = [
-    { href: '#hero',        icon: Home,       id: 'hero',        label: dict.mobile_nav.home },
-    { href: '#projects',    icon: LayoutGrid, id: 'projects',    label: dict.mobile_nav.projects },
-    { href: '#experiences', icon: User,       id: 'experiences', label: dict.mobile_nav.experience },
-    { href: '#contacts',    icon: Mail,       id: 'contacts',    label: dict.mobile_nav.contact },
+    { href: '#hero',        icon: Home,             id: 'hero',        label: dict.mobile_nav.home },
+    { href: '#projects',    icon: FileBracesCorner, id: 'projects',    label: dict.mobile_nav.projects },
+    { href: '#experiences', icon: CircleUser,       id: 'experiences', label: dict.mobile_nav.experience },
+    { href: '#contacts',    icon: MessageCircle,    id: 'contacts',    label: dict.mobile_nav.contact },
   ]
-
-  useEffect(() => {
-    const onScroll = () => {
-      const mid = window.innerHeight / 2
-      let active = allSectionIds[0]
-      for (const id of allSectionIds) {
-        const el = document.getElementById(id)
-        if (el && el.getBoundingClientRect().top <= mid) active = id
-      }
-      setActiveId(active)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   const handleTap = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
@@ -40,34 +23,26 @@ export default function MobileNav() {
 
   return (
     <nav className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 lg:hidden" aria-label="Mobile navigation">
-      <div
-        className="flex items-center gap-1 px-2 py-1.5 rounded-2xl"
-        style={{
-          background: 'rgba(255,255,255,0.45)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-          border: '1px solid rgba(255,255,255,0.5)',
-          boxShadow: '0 2px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8)',
-        }}
-      >
+      <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/45 backdrop-blur-[24px] backdrop-saturate-[180%] border border-white/50 shadow-[0_2px_16px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.8)]">
         {navLinks.map((link) => {
-          const isActive = activeId === link.id
           const Icon = link.icon
+          const isActive = activeId === link.id
           return (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleTap(e, link.id)}
               aria-label={link.label}
-              className="flex items-center justify-center transition-all duration-200 rounded-xl"
-              style={{
-                width: 52,
-                height: 36,
-                background: isActive ? '#17171c' : 'transparent',
-                color: isActive ? '#FAFAF9' : '#93939f',
-              }}
+              className={`flex flex-col items-center justify-center gap-0.5 transition-all duration-200 rounded-xl w-14 h-11 no-underline border ${
+                isActive
+                  ? 'bg-[rgba(23,23,28,0.75)] border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_1px_4px_rgba(0,0,0,0.2)] text-white'
+                  : 'bg-transparent border-transparent text-[#17171c]'
+              }`}
             >
-              <Icon size={18} strokeWidth={1.5} />
+              <Icon size={16} strokeWidth={1.5} />
+              <span className={`font-body text-[9px] leading-none tracking-[0.04em] ${isActive ? 'text-white' : 'text-[#17171c]'}`}>
+                {link.label}
+              </span>
             </a>
           )
         })}
