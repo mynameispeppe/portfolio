@@ -1,17 +1,36 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useDict } from '@/i18n/DictContext'
 
-function ExternalIcon({ size = 14 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-    </svg>
-  )
+const stackIconMap: Record<string, string> = {
+  'Angular':         '/images/devicons/angular-colored.svg',
+  'Angular 15':      '/images/devicons/angular-colored.svg',
+  'Angular 20':      '/images/devicons/angular-colored.svg',
+  'TypeScript':      '/images/devicons/typescript.svg',
+  'Next.js':         '/images/devicons/nextjs.svg',
+  'Next.js 14':      '/images/devicons/nextjs.svg',
+  'Tailwind':        '/images/devicons/tailwindcss.svg',
+  'Tailwind CSS':    '/images/devicons/tailwindcss.svg',
+  'Figma':           '/images/devicons/figma-colored.svg',
+  'HTML':            '/images/devicons/html5.svg',
+  'HTML5':           '/images/devicons/html5.svg',
+  'CSS':             '/images/devicons/css3.svg',
+  'CSS3':            '/images/devicons/css3.svg',
+  'Karma':           '/images/devicons/karma.svg',
+  'React':           '/images/devicons/react.svg',
+  'Sass':            '/images/devicons/sass.svg',
+  'GitHub':          '/images/devicons/github.svg',
+  'npm':             '/images/devicons/npm.svg',
+  'Cypress':         '/images/devicons/cypress.svg',
+  'ESLint':          '/images/devicons/eslint.svg',
+  'Supabase':        '/images/devicons/supabase.svg',
+  'NgRx':            '/images/devicons/ngrx.svg',
 }
 
 type ProjectMeta = {
@@ -24,120 +43,242 @@ type ProjectMeta = {
 }
 
 const projectsMeta: ProjectMeta[] = [
-  {
-    stack: ['Next.js 14', 'TypeScript', 'Supabase'],
-    wip: true,
-  },
-  {
-    stack: ['Angular 15', 'NgRx', 'Material', 'Karma'],
-  },
-  {
-    stack: ['Angular 15', 'Standalone', 'NgRx', 'Material'],
-  },
-  {
-    stack: ['Angular 20', 'Auth0', 'NgRx', 'Tailwind'],
-    githubUrl: 'https://github.com/mynameispeppe/Todo',
-  },
-  {
-    stack: ['Next.js', 'Figma', 'Responsive Design'],
-    liveUrl: 'https://www.eurosplendore.it/',
-  },
-  {
-    stack: ['HTML', 'CSS', 'Responsive Design'],
-    liveUrl: 'https://www.bb-imori.it/',
-  },
+  { stack: ['Next.js 14', 'TypeScript', 'Supabase'], wip: true },
+  { stack: ['Angular 15', 'NgRx', 'Material', 'Karma'] },
+  { stack: ['Angular 15', 'Standalone', 'NgRx', 'Material'] },
+  { stack: ['Angular 20', 'Auth0', 'NgRx', 'Tailwind'], githubUrl: 'https://github.com/mynameispeppe/Todo' },
+  { stack: ['Next.js', 'Figma', 'Responsive Design'], liveUrl: 'https://www.eurosplendore.it/' },
+  { stack: ['HTML', 'CSS', 'Responsive Design'], liveUrl: 'https://www.bb-imori.it/' },
 ]
 
-function ProjectCard({
-  title, subtitle, description, tags, meta, index, active, reduced,
-  labelView, labelWip, labelEnterprise,
-}: {
-  title: string; subtitle: string; description: string; tags: string[]
-  meta: ProjectMeta; index: number; active: boolean; reduced: boolean
-  labelView: string; labelWip: string; labelEnterprise: string
-}) {
-  const scale = active ? 1 : 0.9
-  const opacity = active ? 1 : 0.45
+function StackIcons({ stack, invert = false }: { stack: string[]; invert?: boolean }) {
+  const icons = stack.map(s => stackIconMap[s]).filter(Boolean).slice(0, 4)
+  if (icons.length === 0) return null
+  return (
+    <div className="flex items-center">
+      {icons.map((icon, i) => (
+        <div key={i} className={`w-8 h-8 rounded-full border ${invert ? 'border-white/20 bg-[#FAFAF9]' : 'border-[#d9d9dd] bg-[#FAFAF9]'} flex items-center justify-center p-1 -ml-2 first:ml-0`}>
+          <Image src={icon} alt="" width={14} height={14} className="brightness-0" />
+        </div>
+      ))}
+    </div>
+  )
+}
 
+function CtaNode({ meta, labelView, labelWip, labelEnterprise, dark = false }: {
+  meta: ProjectMeta
+  labelView: string
+  labelWip: string
+  labelEnterprise: string
+  dark?: boolean
+}) {
+  const textClass = dark ? 'text-white' : 'text-[#17171c]'
+  const mutedClass = dark ? 'text-white/50' : 'text-[#616161]'
+  const linkClass = `font-body inline-block text-[14px] font-medium ${textClass} underline underline-offset-[3px]`
   const href = meta.liveUrl ?? meta.githubUrl ?? (meta.previewSlug ? `/projects/${meta.previewSlug}` : '#')
-  const isExternal = !meta.previewSlug || !!meta.liveUrl || !!meta.githubUrl
-  const hasLink = !!(meta.liveUrl || meta.githubUrl || meta.previewSlug)
+
+  if (meta.liveUrl || meta.githubUrl) {
+    return <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>{labelView}</a>
+  }
+  if (meta.previewSlug) {
+    return <Link href={href} className={linkClass}>{labelView}</Link>
+  }
+  if (meta.wip) {
+    return <span className={`font-body text-[14px] font-medium ${mutedClass}`}>{labelWip}</span>
+  }
+  return <span className={`font-body text-[14px] font-medium ${mutedClass}`}>{labelEnterprise}</span>
+}
+
+function BottomSheet({ open, onClose, title, subtitle, description, meta, labelView, labelWip, labelEnterprise, triggerRef }: {
+  open: boolean
+  onClose: () => void
+  title: string
+  subtitle: string
+  description: string
+  meta: ProjectMeta
+  labelView: string
+  labelWip: string
+  labelEnterprise: string
+  triggerRef: React.RefObject<HTMLButtonElement | null>
+}) {
+  const sheetRef = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const wasOpenRef = useRef(false)
+
+  useEffect(() => {
+    if (open) {
+      wasOpenRef.current = true
+      setMounted(true)
+      requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)))
+      document.body.style.overflow = 'hidden'
+      setTimeout(() => sheetRef.current?.focus(), 50)
+    } else {
+      if (!wasOpenRef.current) return
+      wasOpenRef.current = false
+      setVisible(false)
+      const t = setTimeout(() => setMounted(false), 380)
+      document.body.style.overflow = ''
+      triggerRef.current?.focus()
+      return () => clearTimeout(t)
+    }
+  }, [open, triggerRef])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!open) return
+      if (e.key === 'Escape') { onClose(); return }
+      if (e.key === 'Tab') {
+        const focusable = sheetRef.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        if (!focusable || focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus()
+        }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, onClose])
+
+  if (!mounted) return null
+
+  return createPortal(
+    <>
+      <div
+        className="fixed inset-0 z-40 bg-[#17171c]"
+        style={{ opacity: visible ? 0.5 : 0, transition: 'opacity 350ms cubic-bezier(0.32,0.72,0,1)' }}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <div
+        ref={sheetRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        tabIndex={-1}
+        className="fixed bottom-0 left-0 right-0 z-50 bg-[#17171c] rounded-t-[24px] max-h-[80vh] flex flex-col outline-none overflow-hidden"
+        style={{ transform: visible ? 'translateY(0)' : 'translateY(100%)', transition: 'transform 350ms cubic-bezier(0.32,0.72,0,1)' }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_30%_20%,rgba(33,33,33,0.8)_0%,rgba(23,23,28,0)_70%)]" />
+        <div className="flex justify-center pt-3 pb-1 shrink-0 relative z-[1]">
+          <div className="w-10 h-1 rounded-full bg-white/20" />
+        </div>
+        <div className="overflow-y-auto flex-1 px-6 pb-4 pt-4 relative z-[1]">
+          <div className="flex items-start justify-between gap-3 mb-[6px]">
+            <p className="font-display font-normal text-white text-[24px] leading-[1.2] tracking-[-0.32px]">
+              {title}
+            </p>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-full border border-white/20 inline-flex items-center justify-center shrink-0 text-white/70"
+              aria-label="Chiudi"
+            >
+              <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <p className="font-body text-[16px] leading-[1.5] text-white/50 mt-[6px]">
+            {subtitle}
+          </p>
+          <p className="font-body text-[16px] leading-[1.5] text-white/70 mt-6">
+            {description}
+          </p>
+          <div className="mt-6 flex items-center justify-between">
+            <CtaNode meta={meta} labelView={labelView} labelWip={labelWip} labelEnterprise={labelEnterprise} dark />
+            <StackIcons stack={meta.stack} invert />
+          </div>
+        </div>
+        <div className="pb-8 shrink-0" />
+      </div>
+    </>,
+    document.body
+  )
+}
+
+function ProjectCard({
+  title, subtitle, description, meta, active, reduced, isDesktop,
+  labelView, labelWip, labelEnterprise, labelReadMore,
+}: {
+  title: string; subtitle: string; description: string
+  meta: ProjectMeta; active: boolean; reduced: boolean; isDesktop: boolean
+  labelView: string; labelWip: string; labelEnterprise: string
+  labelReadMore: string
+}) {
+  const [sheetOpen, setSheetOpen] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+
+  const applyEffect = isDesktop && !reduced
+  const scale = applyEffect ? (active ? 1 : 0.9) : 1
+  const opacity = applyEffect ? (active ? 1 : 0.45) : 1
 
   return (
-    <div
-      className="rounded-[22px] overflow-hidden h-full flex flex-col bg-white border border-[#f2f2f2] relative"
-      style={{
-        transform: reduced ? 'none' : `scale(${scale})`,
-        opacity,
-        transition: reduced ? 'none' : 'transform 0.35s ease, opacity 0.35s ease',
-        transformOrigin: 'center center',
-        pointerEvents: active ? 'auto' : 'none',
-      }}
-      aria-hidden={active ? undefined : true}
-      tabIndex={active ? 0 : -1}
-    >
+    <>
       <div
-        aria-hidden="true"
-        className="absolute inset-0 rounded-[22px] z-0 pointer-events-none bg-[radial-gradient(ellipse_at_30%_20%,rgba(238,236,231,0.9)_0%,rgba(241,245,255,0.4)_50%,rgba(255,255,255,0)_80%)]"
-        style={{ filter: 'url(#grainy)' }}
-      />
+        className="rounded-[22px] overflow-hidden h-full flex flex-col bg-[#17171c] border border-[#212121] relative"
+        style={{
+          transform: applyEffect ? `scale(${scale})` : 'none',
+          opacity,
+          transition: applyEffect ? 'transform 0.35s ease, opacity 0.35s ease' : 'none',
+          transformOrigin: 'center center',
+          pointerEvents: active ? 'auto' : 'none',
+        }}
+        aria-hidden={active ? undefined : true}
+        tabIndex={active ? 0 : -1}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 rounded-[22px] z-0 pointer-events-none bg-[radial-gradient(ellipse_at_30%_20%,rgba(33,33,33,0.8)_0%,rgba(23,23,28,0)_70%)]"
+        />
+        <div className="px-8 py-6 flex flex-col flex-1 relative z-[1]">
+          <p className="font-display font-normal text-white text-[24px] lg:text-[32px] leading-[1.2] tracking-[-0.32px] mb-[6px]">
+            {title}
+          </p>
+          <p className="font-body text-[16px] leading-[1.5] text-white/50 mb-4">
+            {subtitle}
+          </p>
 
-      <div className="p-8 flex flex-col flex-1 relative z-[1]">
-
-        <p className="font-display font-normal text-text-primary text-[32px] leading-[1.2] tracking-[-0.32px] mb-[6px]">
-          {title}
-        </p>
-        <p className="font-body text-[16px] leading-[1.5] text-[#616161] mb-4">
-          {subtitle}
-        </p>
-        <p className="font-body text-text-secondary text-[16px] leading-[1.5] flex-1 mb-6">
-          {description}
-        </p>
-
-        {/* CTA */}
-        {hasLink ? (
-          <div className="mb-5">
-            {meta.previewSlug && !meta.liveUrl && !meta.githubUrl ? (
-              <Link href={href} className="font-body inline-flex items-center gap-[10px] text-[14px] font-medium text-[#17171c] no-underline">
-                {labelView}
-                <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0">
-                  <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </span>
-              </Link>
-            ) : (
-              <a href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} className="font-body inline-flex items-center gap-[10px] text-[14px] font-medium text-[#17171c] no-underline">
-                {labelView}
-                <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0">
-                  <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </span>
-              </a>
-            )}
+          <div className="hidden sm:block overflow-y-auto flex-1 min-h-0">
+            <p className="font-body text-white/70 text-[16px] leading-[1.5]">
+              {description}
+            </p>
           </div>
-        ) : meta.wip ? (
-          <div className="mb-5 inline-flex items-center gap-[10px]">
-            <span className="font-body text-[14px] font-medium text-[#93939f]">{labelWip}</span>
-            <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0 text-[#93939f]">
-              <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </span>
-          </div>
-        ) : (
-          <div className="mb-5 inline-flex items-center gap-[10px]">
-            <span className="font-body text-[14px] font-medium text-[#17171c]">{labelEnterprise}</span>
-            <span className="w-7 h-7 rounded-full border border-[#d9d9dd] inline-flex items-center justify-center shrink-0 text-[#17171c]">
-              <svg width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </span>
-          </div>
-        )}
 
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span key={tag} className="font-body text-[12px] leading-[1.4] text-[#17171c] bg-[rgba(23,23,28,0.08)] rounded-full px-3 py-1">
-              {tag}
-            </span>
-          ))}
+          <div className="mt-auto flex items-center justify-between pt-4 sm:hidden">
+            <button
+              ref={triggerRef}
+              onClick={() => setSheetOpen(true)}
+              className="font-body text-[14px] font-medium text-white"
+            >
+              {labelReadMore}
+            </button>
+            <StackIcons stack={meta.stack} />
+          </div>
+
+          <div className="hidden sm:flex mt-auto items-center justify-between pt-4">
+            <CtaNode meta={meta} labelView={labelView} labelWip={labelWip} labelEnterprise={labelEnterprise} dark />
+            <StackIcons stack={meta.stack} invert />
+          </div>
         </div>
       </div>
-    </div>
+
+      <BottomSheet
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        meta={meta}
+        labelView={labelView}
+        labelWip={labelWip}
+        labelEnterprise={labelEnterprise}
+        triggerRef={triggerRef}
+      />
+    </>
   )
 }
 
@@ -230,19 +371,19 @@ export function Projects() {
         <div ref={emblaRef} className="overflow-hidden" aria-label={p.aria_carousel} role="region">
           <div className="flex gap-4">
             {p.items.map((item, i) => (
-              <div key={item.title} className="flex-none w-[clamp(300px,80vw,580px)]">
+              <div key={item.title} className="flex-none w-[clamp(300px,80vw,580px)] h-56 sm:h-80">
                 <ProjectCard
                   title={item.title}
                   subtitle={item.subtitle}
                   description={item.description}
-                  tags={item.tags}
                   meta={projectsMeta[i]}
-                  index={i}
                   active={i === selectedIndex}
                   reduced={reduced}
+                  isDesktop={isDesktop}
                   labelView={p.cta_view}
                   labelWip={p.cta_wip}
                   labelEnterprise={p.cta_enterprise}
+                  labelReadMore={p.cta_read_more}
                 />
               </div>
             ))}

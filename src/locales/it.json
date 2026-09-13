@@ -44,6 +44,8 @@
     "cta_view": "Vedi il progetto",
     "cta_wip": "Lavori in corso",
     "cta_enterprise": "Enterprise",
+    "cta_read_more": "Leggi di più",
+    "cta_close": "Chiudi",
     "items": [
       {
         "title": "Vitae",
@@ -58,25 +60,25 @@
         "tags": ["Figma", "NgRx", "Material", "Karma"]
       },
       {
-        "title": "Project Management Panel",
+        "title": "Backoffice",
         "subtitle": "Piattaforma per la gestione del ciclo di vita dei progetti",
         "description": "Ho guidato il redesign completo dell'interfaccia di una piattaforma enterprise. Partendo da un'analisi dell'utilizzo esistente per individuare le criticità, ho ridisegnato flussi e interfaccia da Figma alla produzione, strutturando l'architettura frontend con componenti standalone e NgRx, in un piccolo team Agile.",
         "tags": ["Figma", "Angular", "Karma"]
       },
       {
-        "title": "Angular Todo App",
+        "title": "Todo App",
         "subtitle": "App per la gestione delle attività con Auth0",
         "description": "Progetto personale per tenermi aggiornato sulle nuove versioni di Angular. Autenticazione con Auth0 e API REST mock via json-server.",
         "tags": ["Figma", "NgRx"]
       },
       {
-        "title": "Eurosplendore Website",
+        "title": "Eurosplendore",
         "subtitle": "Sito aziendale per un'attività locale",
         "description": "Ho seguito l'intero processo dal prototipo Figma alla produzione, costruendo componenti Next.js riutilizzabili e affinando l'interfaccia in base ai feedback del cliente.",
         "tags": ["Responsive"]
       },
       {
-        "title": "B&B iMori Website",
+        "title": "B&B iMori",
         "subtitle": "Landing page per un bed & breakfast",
         "description": "Ho progettato e sviluppato il sito di un bed & breakfast, dal prototipo Figma al deploy, con compatibilità cross-browser.",
         "tags": ["HTML", "CSS"]

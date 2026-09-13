@@ -36,6 +36,8 @@ export type Dict = {
     cta_view: string
     cta_wip: string
     cta_enterprise: string
+    cta_read_more: string
+    cta_close: string
     items: Array<{
       title: string
       subtitle: string

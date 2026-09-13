@@ -44,6 +44,8 @@
     "cta_view": "View project",
     "cta_wip": "Work in progress",
     "cta_enterprise": "Enterprise",
+    "cta_read_more": "Read more",
+    "cta_close": "Close",
     "items": [
       {
         "title": "Vitae",
@@ -58,25 +60,25 @@
         "tags": ["Figma", "NgRx", "Material", "Karma"]
       },
       {
-        "title": "Project Management Panel",
+        "title": "Backoffice",
         "subtitle": "Platform for project lifecycle management",
         "description": "I led the full UI redesign of an enterprise platform. Starting from an analysis of existing usage patterns to identify pain points, I redesigned flows and interface from Figma to production, and structured the frontend architecture with standalone components and NgRx, within a small Agile team.",
         "tags": ["Figma", "Angular", "Karma"]
       },
       {
-        "title": "Angular Todo App",
+        "title": "Todo App",
         "subtitle": "Task management app with Auth0",
         "description": "A side project to keep up with the latest Angular releases. Auth0 authentication and a mock REST API via json-server.",
         "tags": ["Figma", "NgRx"]
       },
       {
-        "title": "Eurosplendore Website",
+        "title": "Eurosplendore",
         "subtitle": "Corporate website for a local business",
         "description": "Led the full process from Figma prototype to production, building reusable Next.js components and refining the interface based on client feedback.",
         "tags": ["Responsive"]
       },
       {
-        "title": "B&B iMori Website",
+        "title": "B&B iMori",
         "subtitle": "Landing page for a bed & breakfast",
         "description": "Designed and built the website for a bed & breakfast, from Figma prototype to deployment, with cross-browser compatibility.",
         "tags": ["HTML", "CSS"]

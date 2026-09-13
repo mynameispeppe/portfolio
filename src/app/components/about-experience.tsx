@@ -164,7 +164,7 @@ export function AboutExperience() {
                   </motion.a>
                 </div>
 
-                <div className="flex flex-col gap-2 mt-6">
+                <div className="flex flex-col gap-2 mt-4">
                   {a.bio.map((line, i) => (
                     <p key={i} className={`font-body text-[16px] leading-[1.5] ${i === 0 ? 'text-text-primary' : 'text-text-secondary'}`}>
                       {line}
@@ -176,7 +176,7 @@ export function AboutExperience() {
                   href="/cv.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body inline-block mt-6 text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"
+                  className="font-body inline-block mt-4 text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"
                 >
                   {a.cta_cv}
                 </a>
