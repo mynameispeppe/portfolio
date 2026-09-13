@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     openGraph: {
       title: dict.meta.og_title,
       description: dict.meta.og_description,
-      url: 'https://giuseppemilazzo.dev',
+      url: 'https://gmilazzo.vercel.app/',
       siteName: dict.meta.title,
       locale: lang === 'it' ? 'it_IT' : 'en_US',
       type: 'website',
