@@ -109,7 +109,7 @@ export function AboutExperience() {
 
                 {/* CV button */}
                 <a
-                  href="/cv.pdf"
+                  href={a.cv_href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-body inline-block text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"
@@ -173,7 +173,7 @@ export function AboutExperience() {
                 </div>
 
                 <a
-                  href="/cv.pdf"
+                  href={a.cv_href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-body inline-block mt-4 text-[14px] font-medium text-[#17171c] underline underline-offset-[3px] py-2"

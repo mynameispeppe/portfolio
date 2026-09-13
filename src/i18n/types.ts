@@ -54,6 +54,7 @@ export type Dict = {
     aria_github: string
     aria_linkedin: string
     cta_cv: string
+    cv_href: string
     bio: string[]
     interests: string[]
     experience: Array<{
