@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -109,6 +109,7 @@ function BottomSheet({ open, onClose, title, subtitle, description, meta, labelV
   useEffect(() => {
     if (open) {
       wasOpenRef.current = true
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMounted(true)
       requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)))
       document.body.style.overflow = 'hidden'
@@ -282,12 +283,24 @@ function ProjectCard({
   )
 }
 
+function useMediaQuery(query: string): boolean {
+  return useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia(query)
+      mq.addEventListener('change', cb)
+      return () => mq.removeEventListener('change', cb)
+    },
+    () => window.matchMedia(query).matches,
+    () => false
+  )
+}
+
 export function Projects() {
   const dict = useDict()
   const p = dict.projects
 
-  const [reduced, setReduced] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(false)
+  const reduced = useMediaQuery('(prefers-reduced-motion: reduce)')
+  const isDesktop = useMediaQuery('(min-width: 1024px)')
   const startIndex = isDesktop ? 1 : 0
   const [selectedIndex, setSelectedIndex] = useState(startIndex)
   const [canPrev, setCanPrev] = useState(false)
@@ -296,26 +309,6 @@ export function Projects() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center', loop: false, skipSnaps: false, dragFree: false, startIndex,
   })
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const h = (e: MediaQueryListEvent) => setReduced(e.matches)
-    mq.addEventListener('change', h)
-    return () => mq.removeEventListener('change', h)
-  }, [])
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
-    setIsDesktop(mq.matches)
-    setSelectedIndex(mq.matches ? 1 : 0)
-    const h = (e: MediaQueryListEvent) => {
-      setIsDesktop(e.matches)
-      setSelectedIndex(e.matches ? 1 : 0)
-    }
-    mq.addEventListener('change', h)
-    return () => mq.removeEventListener('change', h)
-  }, [])
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
@@ -328,7 +321,7 @@ export function Projects() {
     if (!emblaApi) return
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
-    onSelect()
+    requestAnimationFrame(() => onSelect())
     return () => { emblaApi.off('select', onSelect); emblaApi.off('reInit', onSelect) }
   }, [emblaApi, onSelect])
 
